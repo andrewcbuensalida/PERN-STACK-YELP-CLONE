@@ -11,7 +11,8 @@ const RestaurantList = (props) => {
 		const fetchData = async () => {
 			try {
 				const response = await RestaurantFinder.get("/");
-				console.log(response.data.data);
+				console.log("this is response.data.data.restaurants");
+				console.log(response.data.data.restaurants);
 				setRestaurants(response.data.data.restaurants);
 			} catch (err) {}
 		};
@@ -61,8 +62,8 @@ const RestaurantList = (props) => {
 			<table className="table table-hover table-dark">
 				<thead>
 					<tr className="bg-primary">
-						<th scope="col">Restaurant</th>
-						<th scope="col">Location</th>
+						<th scope="col">Doctor</th>
+						<th scope="col">Specialty</th>
 						<th scope="col">Price Range</th>
 						<th scope="col">Ratings</th>
 						<th scope="col">Edit</th>
@@ -74,6 +75,7 @@ const RestaurantList = (props) => {
 						restaurants.map((restaurant) => {
 							return (
 								<tr
+									style={{ cursor: "pointer" }}
 									onClick={() => handleRestaurantSelect(restaurant.id)}
 									key={restaurant.id}
 								>
