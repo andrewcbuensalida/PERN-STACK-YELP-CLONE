@@ -11,8 +11,8 @@ const RestaurantList = (props) => {
 		const fetchData = async () => {
 			try {
 				const response = await RestaurantFinder.get("/");
-				console.log("this is response.data.data.restaurants");
-				console.log(response.data.data.restaurants);
+				// console.log("this is response.data.data.restaurants");
+				// console.log(response.data.data.restaurants);
 				setRestaurants(response.data.data.restaurants);
 			} catch (err) {}
 		};
@@ -44,8 +44,8 @@ const RestaurantList = (props) => {
 	};
 
 	const renderRating = (restaurant) => {
-		console.log("this is restaurant");
-		console.log(restaurant);
+		// console.log("this is restaurant");
+		// console.log(restaurant);
 		if (!restaurant.count) {
 			return <span className="text-warning">0 reviews</span>;
 		}
