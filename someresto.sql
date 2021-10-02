@@ -1,0 +1,12 @@
+insert into restaurants (id, name, location, price_range) values (149, 'Julie Mallaby', 'UNITED EXCHANGE CORP.', 3);
+insert into restaurants (id, name, location, price_range) values (150, 'Jordana Trinke', 'Wal-Mart Stores, Inc', 3);
+insert into restaurants (id, name, location, price_range) values (151, 'Sara-ann Kibard', 'Napoleon Perdis Cosmetics, Inc', 2);
+insert into restaurants (id, name, location, price_range) values (152, 'Ryon Slipper', 'Colgate-Palmolive Company', 3);
+insert into restaurants (id, name, location, price_range) values (153, 'Ailyn Klemmt', 'Preferred Pharmaceuticals, Inc.', 3);
+insert into restaurants (id, name, location, price_range) values (154, 'Godard Stuchbery', 'GeneraMedix Inc.', 5);
+insert into restaurants (id, name, location, price_range) values (149, 'Julie Mallaby', 'UNITED EXCHANGE CORP.', 3);
+insert into restaurants (id, name, location, price_range) values (150, 'Jordana Trinke', 'Wal-Mart Stores, Inc', 3);
+insert into restaurants (id, name, location, price_range) values (151, 'Sara-ann Kibard', 'Napoleon Perdis Cosmetics, Inc', 2);
+insert into restaurants (id, name, location, price_range) values (152, 'Ryon Slipper', 'Colgate-Palmolive Company', 3);
+insert into restaurants (id, name, location, price_range) values (153, 'Ailyn Klemmt', 'Preferred Pharmaceuticals, Inc.', 3);
+insert into restaurants (id, name, location, price_range) values (154, 'Godard Stuchbery', 'GeneraMedix Inc.', 5);

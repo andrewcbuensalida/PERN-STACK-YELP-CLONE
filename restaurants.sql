@@ -1,4 +1,4 @@
-insert into restaurants (id, name, location, price_range) values (1, 'Hayley Stockings', 'Middlesex Welding Sales Co, Inc.', 3);
+insert into doctors (id, name, company, price_range) values (1000, 'Hayden Stockton', 'Middlesex Welding Sales Co, Inc.', 3);
 insert into restaurants (id, name, location, price_range) values (2, 'Genevra Pavitt', 'BioActive Nutritional, Inc.', 4);
 insert into restaurants (id, name, location, price_range) values (3, 'Nicky Gingedale', 'Matrixx Initiatives, Inc.', 3);
 insert into restaurants (id, name, location, price_range) values (4, 'Care Graddon', 'Nelco Laboratories, Inc.', 5);

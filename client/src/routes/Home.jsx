@@ -1,16 +1,16 @@
 import React from "react";
 import Header from "../components/Header";
-import AddRestaurant from "../components/AddRestaurant";
-import RestaurantList from "../components/RestaurantList";
+import AddDoctor from "../components/AddDoctor";
+import DoctorList from "../components/DoctorList";
 
 const Home = () => {
-  return (
-    <div>
-      <Header />
-      <AddRestaurant />
-      <RestaurantList />
-    </div>
-  );
+	return (
+		<div>
+			<Header />
+			<AddDoctor />
+			<DoctorList />
+		</div>
+	);
 };
 
 export default Home;

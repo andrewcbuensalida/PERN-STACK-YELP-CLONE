@@ -1,6 +1,6 @@
 CREATE TABLE reviews (
     id BIGSERIAL NOT NULL PRIMARY KEY,
-    restaurant_id BIGINT NOT NULL REFERENCES restaurants(id),
+    doctor_id BIGINT NOT NULL REFERENCES doctors(id),
     name VARCHAR(50) NOT NULL,
     review TEXT NOT NULL,
     rating INT NOT NULL check(
@@ -9,20 +9,20 @@ CREATE TABLE reviews (
     )
 );
 select *
-from restaurants
+from doctors
     left join(
-        select restaurant_id,
+        select doctor_id,
             count(*),
             TRUNC(AVG(rating), 1) as average_rating
         from reviews
-        group by restaurant_id
-    ) reviews on restaurants.id = reviews.restaurant_id;
+        group by doctor_id
+    ) reviews on doctors.id = reviews.doctor_id;
 
 
     ?
-create table restaurants (
+create table doctors (
     id bigserial not null primary key,
     name varchar(50) not null,
-    location varchar(50) not null,
+    company varchar(50) not null,
     price_range int not null check(price_range>=1 and price_range <= 5)
 );

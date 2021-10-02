@@ -1,23 +1,23 @@
-import React, { useState, useContext } from "react";
-import RestaurantFinder from "../apis/RestaurantFinder";
-import { RestaurantsContext } from "../context/RestaurantsContext";
+import React, { useState, useContext, useRef } from "react";
+import DoctorFinder from "../apis/DoctorFinder";
+import { DoctorsContext } from "../context/DoctorsContext";
 
-const AddRestaurant = () => {
-	const { addRestaurants } = useContext(RestaurantsContext);
+const AddDoctor = () => {
+	const { addDoctors } = useContext(DoctorsContext);
 	const [name, setName] = useState("");
-	const [location, setLocation] = useState("");
+	const [company, setLocation] = useState("");
 	const [priceRange, setPriceRange] = useState("Price Range");
 
 	const handleSubmit = async (e) => {
 		e.preventDefault();
 		try {
-			const response = await RestaurantFinder.post("/", {
+			const response = await DoctorFinder.post("/", {
 				name,
-				location,
+				company,
 				price_range: priceRange,
 			});
 			console.log(response.data.data);
-			addRestaurants(response.data.data.restaurant);
+			addDoctors(response.data.data.doctor);
 			setName("");
 			setLocation("");
 			setPriceRange("Price Range");
@@ -25,6 +25,7 @@ const AddRestaurant = () => {
 			console.log(err);
 		}
 	};
+
 	return (
 		<div className="mb-4">
 			<form action="">
@@ -40,11 +41,11 @@ const AddRestaurant = () => {
 					</div>
 					<div className="col">
 						<input
-							value={location}
+							value={company}
 							onChange={(e) => setLocation(e.target.value)}
 							className="form-control"
 							type="text"
-							placeholder="Specialty"
+							placeholder="Company"
 						/>
 					</div>
 					<div className="col">
@@ -74,4 +75,4 @@ const AddRestaurant = () => {
 	);
 };
 
-export default AddRestaurant;
+export default AddDoctor;

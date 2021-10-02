@@ -1,23 +1,23 @@
 import React, { useState, useContext, useEffect } from "react";
 import { useParams, useHistory } from "react-router-dom";
-import { RestaurantsContext } from "../context/RestaurantsContext";
-import RestaurantFinder from "../apis/RestaurantFinder";
+import { DoctorsContext } from "../context/DoctorsContext";
+import DoctorFinder from "../apis/DoctorFinder";
 
-const UpdateRestaurant = (props) => {
+const UpdateDoctor = (props) => {
 	const { id } = useParams();
 	let history = useHistory();
-	const { restaurants } = useContext(RestaurantsContext);
+	const { doctors } = useContext(DoctorsContext);
 	const [name, setName] = useState("");
-	const [location, setLocation] = useState("");
+	const [company, setLocation] = useState("");
 	const [priceRange, setPriceRange] = useState("");
 
 	useEffect(() => {
 		const fetchData = async () => {
-			const response = await RestaurantFinder.get(`/${id}`);
+			const response = await DoctorFinder.get(`/${id}`);
 			console.log(response.data.data);
-			setName(response.data.data.restaurant.name);
-			setLocation(response.data.data.restaurant.location);
-			setPriceRange(response.data.data.restaurant.price_range);
+			setName(response.data.data.doctor.name);
+			setLocation(response.data.data.doctor.company);
+			setPriceRange(response.data.data.doctor.price_range);
 		};
 
 		fetchData();
@@ -25,9 +25,9 @@ const UpdateRestaurant = (props) => {
 
 	const handleSubmit = async (e) => {
 		e.preventDefault();
-		const updatedRestaurant = await RestaurantFinder.put(`/${id}`, {
+		const updatedDoctor = await DoctorFinder.put(`/${id}`, {
 			name,
-			location,
+			company,
 			price_range: priceRange,
 		});
 		history.push("/");
@@ -48,11 +48,11 @@ const UpdateRestaurant = (props) => {
 				</div>
 
 				<div className="form-group">
-					<label htmlFor="location">Specialty</label>
+					<label htmlFor="company">Specialty</label>
 					<input
-						value={location}
+						value={company}
 						onChange={(e) => setLocation(e.target.value)}
-						id="location"
+						id="company"
 						className="form-control"
 						type="text"
 					/>
@@ -79,4 +79,4 @@ const UpdateRestaurant = (props) => {
 	);
 };
 
-export default UpdateRestaurant;
+export default UpdateDoctor;
