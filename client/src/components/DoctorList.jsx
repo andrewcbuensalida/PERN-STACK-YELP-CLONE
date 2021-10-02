@@ -16,21 +16,10 @@ const DoctorList = (props) => {
 			isLoading.current = true;
 			const fetchData = async () => {
 				try {
-					console.log("in the fetch");
 					const response = await DoctorFinder.get(`/name/${offset}/ASC`);
-					console.log("this is response.data.data.doctors");
-					console.log(response.data.data.doctors);
-
 					setDoctors((prev) => {
-						console.log("prev");
-						console.log(prev);
-						console.log("spreaded");
-						console.log([...prev]);
-						console.log("response doctors in setdoctors");
-						console.log(response.data.data.doctors);
 						return [...prev, ...response.data.data.doctors];
 					});
-					console.log("after fetch");
 					isLoading.current = false;
 				} catch (err) {}
 			};
@@ -39,14 +28,12 @@ const DoctorList = (props) => {
 		return () => window.removeEventListener("scroll", handleScroll);
 	}, [offset]);
 
-	console.log("hello");
 	const handleScroll = () => {
 		if (
 			document.documentElement.scrollTop >
 				document.documentElement.scrollHeight - 1000 &&
 			!isLoading.current
 		) {
-			console.log("inside handlescroll");
 			setOffset((prev) => prev + 20);
 		}
 	};
@@ -75,8 +62,6 @@ const DoctorList = (props) => {
 	};
 
 	const renderRating = (doctor) => {
-		// console.log("this is doctor");
-		// console.log(doctor);
 		if (!doctor.count) {
 			return <span className="text-warning">0 reviews</span>;
 		}
