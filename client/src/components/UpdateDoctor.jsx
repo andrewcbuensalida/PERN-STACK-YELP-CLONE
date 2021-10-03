@@ -6,15 +6,14 @@ import DoctorFinder from "../apis/DoctorFinder";
 const UpdateDoctor = (props) => {
 	const { id } = useParams();
 	let history = useHistory();
-	const { doctors } = useContext(DoctorsContext);
 	const [name, setName] = useState("");
 	const [company, setLocation] = useState("");
 	const [priceRange, setPriceRange] = useState("");
+	const { setNeedsUpdating } = useContext(DoctorsContext);
 
 	useEffect(() => {
 		const fetchData = async () => {
 			const response = await DoctorFinder.get(`/${id}`);
-			console.log(response.data.data);
 			setName(response.data.data.doctor.name);
 			setLocation(response.data.data.doctor.company);
 			setPriceRange(response.data.data.doctor.price_range);
@@ -30,9 +29,25 @@ const UpdateDoctor = (props) => {
 			company,
 			price_range: priceRange,
 		});
+		// setNeedsUpdating(true);
+		// console.log("updated doctor");
+		// console.log(updatedDoctor.data.data.doctor);
+		// console.log("location doctor");
+		// console.log(history.location.state.doctor);
+		// setDoctors((prev) => {
+		// 	return [
+		// 		...prev,
+		// 		{
+		// 			...history.location.state.doctor,
+		// 			company: updatedDoctor.data.data.doctor.company,
+		// 			name: updatedDoctor.data.data.doctor.name,
+		// 			price_range: updatedDoctor.data.data.doctor.price_range,
+		// 		},
+		// 	];
+		// });
+		setNeedsUpdating(true);
 		history.push("/");
 	};
-
 	return (
 		<div>
 			<form action="">
@@ -48,7 +63,7 @@ const UpdateDoctor = (props) => {
 				</div>
 
 				<div className="form-group">
-					<label htmlFor="company">Specialty</label>
+					<label htmlFor="company">Company</label>
 					<input
 						value={company}
 						onChange={(e) => setLocation(e.target.value)}

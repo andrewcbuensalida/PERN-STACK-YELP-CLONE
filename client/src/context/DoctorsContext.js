@@ -5,6 +5,7 @@ export const DoctorsContext = createContext();
 export const DoctorsContextProvider = (props) => {
 	const [doctors, setDoctors] = useState([]);
 	const [selectedDoctor, setSelectedDoctor] = useState(null);
+	const [needsUpdating, setNeedsUpdating] = useState(false);
 
 	const addDoctors = (doctor) => {
 		setDoctors([doctor, ...doctors]);
@@ -17,6 +18,8 @@ export const DoctorsContextProvider = (props) => {
 				addDoctors,
 				selectedDoctor,
 				setSelectedDoctor,
+				needsUpdating,
+				setNeedsUpdating,
 			}}
 		>
 			{props.children}

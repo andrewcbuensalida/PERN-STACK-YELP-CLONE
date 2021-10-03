@@ -2,21 +2,24 @@ import React, { useEffect, useContext, useState, useRef } from "react";
 import DoctorFinder from "../apis/DoctorFinder";
 import { DoctorsContext } from "../context/DoctorsContext";
 import { useHistory } from "react-router-dom";
-import StarRating from "./StarRating";
+import Ratings from "./Ratings";
 
-const DoctorList = (props) => {
-	const { doctors, setDoctors } = useContext(DoctorsContext);
+const DoctorList = () => {
+	const { doctors, setDoctors, needsUpdating, setNeedsUpdating } =
+		useContext(DoctorsContext);
 	const [offset, setOffset] = useState(0);
 	const isLoading = useRef(false);
 	let history = useHistory();
+	console.log("does it render?");
 
 	useEffect(() => {
 		window.addEventListener("scroll", handleScroll);
-		if (!isLoading.current) {
+		if (!isLoading.current && !needsUpdating) {
 			isLoading.current = true;
 			const fetchData = async () => {
 				try {
 					const response = await DoctorFinder.get(`/name/${offset}/ASC`);
+					console.log("in useeffect if");
 					setDoctors((prev) => {
 						return [...prev, ...response.data.data.doctors];
 					});
@@ -27,6 +30,20 @@ const DoctorList = (props) => {
 		}
 		return () => window.removeEventListener("scroll", handleScroll);
 	}, [offset]);
+
+	useEffect(() => {
+		const fetchData = async () => {
+			try {
+				const response = await DoctorFinder.get(`/name/${offset}/ASC`);
+				console.log("in useeffect if");
+				setDoctors(() => {
+					return [...response.data.data.doctors];
+				});
+			} catch (err) {}
+		};
+		fetchData();
+		setNeedsUpdating(false);
+	}, [needsUpdating]);
 
 	const handleScroll = () => {
 		if (
@@ -52,25 +69,16 @@ const DoctorList = (props) => {
 		}
 	};
 
-	const handleUpdate = (e, id) => {
+	const handleUpdate = (e, id, doctor) => {
 		e.stopPropagation();
-		history.push(`/doctors/${id}/update`);
+		history.push({
+			pathname: `/doctors/${id}/update`,
+			state: { doctor },
+		});
 	};
 
 	const handleDoctorSelect = (id) => {
 		history.push(`/doctors/${id}`);
-	};
-
-	const renderRating = (doctor) => {
-		if (!doctor.count) {
-			return <span className="text-warning">0 reviews</span>;
-		}
-		return (
-			<>
-				<StarRating rating={doctor.average_rating} />
-				<span className="text-warning ml-1">({doctor.count})</span>
-			</>
-		);
 	};
 
 	return (
@@ -98,10 +106,12 @@ const DoctorList = (props) => {
 									<td>{doctor.name}</td>
 									<td>{doctor.company}</td>
 									<td>{"$".repeat(doctor.price_range)}</td>
-									<td>{renderRating(doctor)}</td>
+									<td>
+										<Ratings doctor={doctor} />
+									</td>
 									<td>
 										<button
-											onClick={(e) => handleUpdate(e, doctor.id)}
+											onClick={(e) => handleUpdate(e, doctor.id, doctor)}
 											className="btn btn-warning"
 										>
 											Update

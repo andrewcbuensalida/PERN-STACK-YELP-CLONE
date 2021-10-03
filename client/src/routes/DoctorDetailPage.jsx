@@ -14,8 +14,8 @@ const DoctorDetailPage = () => {
 		const fetchData = async () => {
 			try {
 				const response = await DoctorFinder.get(`/${id}`);
+				console.log("response");
 				console.log(response);
-
 				setSelectedDoctor(response.data.data);
 			} catch (err) {
 				console.log(err);
@@ -42,7 +42,10 @@ const DoctorDetailPage = () => {
 					<div className="mt-3">
 						<Reviews reviews={selectedDoctor.reviews} />
 					</div>
-					<AddReview />
+					<AddReview
+						setSelectedDoctor={setSelectedDoctor}
+						selectedDoctor={selectedDoctor}
+					/>
 				</>
 			)}
 		</div>

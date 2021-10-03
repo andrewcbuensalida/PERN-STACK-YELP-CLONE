@@ -1,13 +1,13 @@
-import React, { useState } from "react";
+import React, { useState, useContext } from "react";
 import DoctorFinder from "../apis/DoctorFinder";
 import { useLocation, useParams, useHistory } from "react-router-dom";
+import { DoctorsContext } from "../context/DoctorsContext";
 
-const AddReview = () => {
+const AddReview = ({ selectedDoctor, setSelectedDoctor }) => {
 	const { id } = useParams();
 	const company = useLocation();
-	console.log(company);
 	const history = useHistory();
-	console.log(id);
+	const { setNeedsUpdating } = useContext(DoctorsContext);
 
 	const [name, setName] = useState("");
 	const [reviewText, setReviewText] = useState("");
@@ -21,6 +21,14 @@ const AddReview = () => {
 				review: reviewText,
 				rating,
 			});
+			setSelectedDoctor({
+				...selectedDoctor,
+				reviews: [...selectedDoctor.reviews, response.data.data.review],
+			});
+			setName("");
+			setRating("Rating");
+			setReviewText("");
+			setNeedsUpdating(true);
 			history.push("/");
 			history.push(company.pathname);
 		} catch (err) {}
