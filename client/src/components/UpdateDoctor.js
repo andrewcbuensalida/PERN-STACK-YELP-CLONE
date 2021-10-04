@@ -1,6 +1,5 @@
 import React, { useState, useContext, useEffect } from "react";
 import { useParams, useHistory } from "react-router-dom";
-import { DoctorsContext } from "../context/DoctorsContext";
 import DoctorFinder from "../apis/DoctorFinder";
 
 const UpdateDoctor = (props) => {
@@ -9,7 +8,6 @@ const UpdateDoctor = (props) => {
 	const [name, setName] = useState("");
 	const [company, setLocation] = useState("");
 	const [priceRange, setPriceRange] = useState("");
-	const { setNeedsUpdating } = useContext(DoctorsContext);
 
 	useEffect(() => {
 		const fetchData = async () => {
@@ -29,24 +27,13 @@ const UpdateDoctor = (props) => {
 			company,
 			price_range: priceRange,
 		});
-		// setNeedsUpdating(true);
-		// console.log("updated doctor");
-		// console.log(updatedDoctor.data.data.doctor);
-		// console.log("location doctor");
-		// console.log(history.location.state.doctor);
-		// setDoctors((prev) => {
-		// 	return [
-		// 		...prev,
-		// 		{
-		// 			...history.location.state.doctor,
-		// 			company: updatedDoctor.data.data.doctor.company,
-		// 			name: updatedDoctor.data.data.doctor.name,
-		// 			price_range: updatedDoctor.data.data.doctor.price_range,
-		// 		},
-		// 	];
-		// });
-		setNeedsUpdating(true);
-		history.push("/");
+
+		history.location.state.doctor.name = updatedDoctor.data.data.doctor.name;
+		history.location.state.doctor.company =
+			updatedDoctor.data.data.doctor.company;
+		history.location.state.doctor.price_range =
+			updatedDoctor.data.data.doctor.price_range;
+		history.push(`/#${id}`);
 	};
 	return (
 		<div>

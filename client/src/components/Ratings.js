@@ -1,9 +1,7 @@
-import React, { useContext, useEffect } from "react";
+import React from "react";
 import StarRating from "./StarRating";
-import { DoctorsContext } from "../context/DoctorsContext";
 
 const Ratings = ({ doctor }) => {
-	useEffect(() => {});
 	if (!doctor.count) {
 		return <span className="text-warning">0 reviews</span>;
 	}

@@ -32,3 +32,10 @@ if scrolling too fast, total is around 980, sometimes 1000, but when scrollign m
 next time for rerendering right away the data after updating, maybe try web dev simplifieds method next time. i managed to make it work with my method, which is kind of hacky, had to make a needsUpdating boolean state in context, and when the user updates info or makes a review, this switches to true, so when history.pushed to the main page, it wont do the infinite scroll fetch which appends the new data. instead, it will do a reset fetch. the downside is the user wont end up where they left of, since the data is reset to the beginning. spent the whole day thinking about this. time to move on.
 
 importing sql might have led to the sequence not being up to date, so when adding another doctor, it says pkey already taken. this is an easy fix, SELECT setval('doctors_id_seq', (SELECT max(id) FROM doctors));
+
+multi page apps suck, theyre so tricky because re-renders after history.pushing, meaning another 20 doctors are added to the page even just updating. spa are better. to preven this, needs to have the fetch as a hook.
+
+work around to pass data between multipage apps is history.push has a second parameter which can pass some data state.
+still goes back to the start of the scroll after updating.
+
+seems like useeffect is the way to do async stuff, based on what ive seen in instagram. the other way is through click listeners.

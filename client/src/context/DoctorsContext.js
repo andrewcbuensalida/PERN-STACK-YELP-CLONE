@@ -1,5 +1,4 @@
 import React, { useState, createContext } from "react";
-
 export const DoctorsContext = createContext();
 
 export const DoctorsContextProvider = (props) => {
