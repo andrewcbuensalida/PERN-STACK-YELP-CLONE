@@ -1,14 +1,14 @@
 import React from "react";
 import StarRating from "./StarRating";
 
-const Ratings = ({ doctor }) => {
-	if (!doctor.count) {
+const Ratings = ({ count, averageRating }) => {
+	if (!count) {
 		return <span className="text-warning">0 reviews</span>;
 	}
 	return (
 		<>
-			<StarRating rating={doctor.average_rating} />
-			<span className="text-warning ml-1">({doctor.count})</span>
+			<StarRating rating={averageRating} />
+			<span className="text-warning ml-1">({count})</span>
 		</>
 	);
 };

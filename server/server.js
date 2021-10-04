@@ -43,7 +43,6 @@ app.get("/api/v1/doctors/:id", async (req, res) => {
 			"select * from reviews where doctor_id = $1",
 			[req.params.id]
 		);
-
 		res.status(200).json({
 			status: "succes",
 			data: {

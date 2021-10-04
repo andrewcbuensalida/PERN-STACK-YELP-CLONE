@@ -1,13 +1,34 @@
-import React, { useContext } from "react";
+import React, { useContext, useState, useEffect } from "react";
 import Ratings from "./Ratings";
 import { DoctorsContext } from "../context/DoctorsContext";
 import DoctorFinder from "../apis/DoctorFinder";
-import { useHistory } from "react-router-dom";
+import UpdateDoctor from "./UpdateDoctor";
+import ReviewDoctor from "./ReviewDoctor";
 
 function DoctorInList({ doctor }) {
-	console.log("doctor rendered");
+	console.log("doctorinlist rendered");
 	const { setDoctors } = useContext(DoctorsContext);
-	let history = useHistory();
+	const [isUpdateSeen, setIsUpdateSeen] = useState(false);
+	const [isReviewSeen, setIsReviewSeen] = useState(false);
+	const [reviews, setReviews] = useState([]);
+	doctor.count = doctor.count || 0;
+	const [count, setCount] = useState(Number(doctor.count));
+	doctor.average_rating = doctor.average_rating || 0;
+	const [averageRating, setAverageRating] = useState(
+		Number(doctor.average_rating)
+	);
+	useEffect(() => {
+		const fetchData = async () => {
+			try {
+				const response = await DoctorFinder.get(`/${doctor.id}`);
+				setReviews(response.data.data.reviews);
+			} catch (err) {
+				console.log(err);
+			}
+		};
+
+		fetchData();
+	}, []);
 
 	const handleDelete = async (e, id) => {
 		e.stopPropagation();
@@ -23,38 +44,52 @@ function DoctorInList({ doctor }) {
 		}
 	};
 
-	const handleUpdate = (e, id, doctor) => {
+	const handleUpdate = (e) => {
 		e.stopPropagation();
-		history.push({
-			pathname: `/doctors/${id}/update`,
-			state: { doctor },
-		});
+		setIsUpdateSeen(true);
 	};
 
-	const handleDoctorSelect = (id) => {
-		history.push(`/doctors/${id}`);
+	const handleDoctorSelect = (e) => {
+		setIsReviewSeen(true);
 	};
 
 	return (
 		<tr
 			id={doctor.id}
 			style={{ cursor: "pointer" }}
-			onClick={() => handleDoctorSelect(doctor.id)}
+			onClick={(e) => handleDoctorSelect(e)}
 			key={doctor.id}
 		>
+			<ReviewDoctor
+				isReviewSeen={isReviewSeen}
+				setIsReviewSeen={setIsReviewSeen}
+				doctor={doctor}
+				reviews={reviews}
+				setReviews={setReviews}
+				count={count}
+				setCount={setCount}
+				averageRating={averageRating}
+				setAverageRating={setAverageRating}
+			/>
+
 			<td>{doctor.name}</td>
 			<td>{doctor.company}</td>
 			<td>{"$".repeat(doctor.price_range)}</td>
 			<td>
-				<Ratings doctor={doctor} />
+				{console.log("avgrting")}
+				{console.log(averageRating)}
+				<Ratings count={count} averageRating={averageRating} />
 			</td>
 			<td>
-				<button
-					onClick={(e) => handleUpdate(e, doctor.id, doctor)}
-					className="btn btn-warning"
-				>
+				<button onClick={(e) => handleUpdate(e)} className="btn btn-warning">
 					Update
 				</button>
+
+				<UpdateDoctor
+					isUpdateSeen={isUpdateSeen}
+					setIsUpdateSeen={setIsUpdateSeen}
+					doctor={doctor}
+				/>
 			</td>
 			<td>
 				<button

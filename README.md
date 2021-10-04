@@ -39,3 +39,5 @@ work around to pass data between multipage apps is history.push has a second par
 still goes back to the start of the scroll after updating.
 
 seems like useeffect is the way to do async stuff, based on what ive seen in instagram. the other way is through click listeners.
+
+its very import where state is declared. if its too low down the tree, only the children will get rendered.

@@ -5,7 +5,6 @@ import DoctorList from "../components/DoctorList";
 import useDoctors from "../hooks/useDoctors";
 
 const Home = () => {
-	useDoctors(0);
 	return (
 		<div>
 			<Header />
