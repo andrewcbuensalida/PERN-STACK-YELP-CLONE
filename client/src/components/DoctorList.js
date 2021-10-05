@@ -4,31 +4,17 @@ import { DoctorsContext } from "../context/DoctorsContext";
 import DoctorInList from "./DoctorInList";
 // import useDoctors from "../hooks/useDoctors";
 const DoctorList = () => {
-	const { doctors, setDoctors } = useContext(DoctorsContext);
-	const [offset, setOffset] = useState(0);
+	const [doctors, setDoctors] = useState([]);
+	// const [offset, setOffset] = useState(0);
 	// const [isLoading, setIsLoading] = useState(false);
 	const isLoading = useRef(false);
+	const offset = useRef(0);
 	console.log("doctor list rendered");
 	useEffect(() => {
 		window.addEventListener("scroll", handleScroll);
-		if (!isLoading.current) {
-			const fetchData = async () => {
-				isLoading.current = true; //?
-				try {
-					const response = await DoctorFinder.get(`/name/${offset}/ASC`);
-					if (response.data.results !== 0) {
-						setDoctors((prevDoctors) => [
-							...prevDoctors,
-							...response.data.data.doctors,
-						]);
-					}
-					isLoading.current = false; //?
-				} catch (err) {}
-			};
-			fetchData();
-		}
-		return () => window.removeEventListener("scroll", handleScroll);
-	}, [offset]);
+		fetchDoctors();
+		// return () => window.removeEventListener("scroll", handleScroll);
+	}, []);
 
 	const handleScroll = () => {
 		if (
@@ -36,8 +22,25 @@ const DoctorList = () => {
 				document.documentElement.scrollHeight - 1000 &&
 			!isLoading.current
 		) {
-			setOffset((prev) => prev + 20);
+			fetchDoctors();
 		}
+	};
+
+	const fetchDoctors = async () => {
+		isLoading.current = true; //?
+		try {
+			const response = await DoctorFinder.get(`/name/${offset.current}/ASC`);
+			console.log("response");
+			console.log(response);
+			if (response.data.results !== 0) {
+				setDoctors((prevDoctors) => [
+					...prevDoctors,
+					...response.data.data.doctors,
+				]);
+			}
+			isLoading.current = false; //?
+			offset.current += 40;
+		} catch (err) {}
 	};
 
 	return (
@@ -55,7 +58,13 @@ const DoctorList = () => {
 				</thead>
 				<tbody>
 					{doctors.map((doctor) => {
-						return <DoctorInList key={doctor.id} doctor={doctor} />;
+						return (
+							<DoctorInList
+								key={doctor.id}
+								doctor={doctor}
+								setDoctors={setDoctors}
+							/>
+						);
 					})}
 				</tbody>
 			</table>

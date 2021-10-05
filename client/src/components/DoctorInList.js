@@ -5,9 +5,9 @@ import DoctorFinder from "../apis/DoctorFinder";
 import UpdateDoctor from "./UpdateDoctor";
 import ReviewDoctor from "./ReviewDoctor";
 
-function DoctorInList({ doctor }) {
+function DoctorInList({ doctor, setDoctors }) {
 	console.log("individual rendered");
-	const { setDoctors } = useContext(DoctorsContext);
+	console.log(doctor);
 	const [isUpdateSeen, setIsUpdateSeen] = useState(false);
 	const [isReviewSeen, setIsReviewSeen] = useState(false);
 	const [reviews, setReviews] = useState([]);
