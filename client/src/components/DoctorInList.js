@@ -7,6 +7,7 @@ import ReviewDoctor from "./ReviewDoctor";
 
 function DoctorInList({ doctor, setDoctors }) {
 	// console.log(doctor);
+	const [isDoctorSeen, setIsDoctorSeen] = useState(true);
 	const [isUpdateSeen, setIsUpdateSeen] = useState(false);
 	const [isReviewSeen, setIsReviewSeen] = useState(false);
 	const [reviews, setReviews] = useState(null);
@@ -33,11 +34,7 @@ function DoctorInList({ doctor, setDoctors }) {
 		e.stopPropagation();
 		try {
 			await DoctorFinder.delete(`/${id}`);
-			setDoctors((prevDoctors) =>
-				prevDoctors.filter((doc) => {
-					return doc.id !== id;
-				})
-			);
+			setIsDoctorSeen(false);
 		} catch (err) {
 			console.log(err);
 		}
@@ -54,7 +51,8 @@ function DoctorInList({ doctor, setDoctors }) {
 	console.log("individual rendered");
 
 	return (
-		reviews && (
+		reviews &&
+		isDoctorSeen && (
 			<tr
 				id={doctor.id}
 				style={{ cursor: "pointer" }}
