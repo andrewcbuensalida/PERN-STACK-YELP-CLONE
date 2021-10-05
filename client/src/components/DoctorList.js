@@ -8,6 +8,7 @@ const DoctorList = () => {
 	const isLoading = useRef(false);
 	const offset = useRef(0);
 	console.log("doctor list rendered");
+
 	useEffect(() => {
 		window.addEventListener("scroll", handleScroll);
 		fetchDoctors();
@@ -30,8 +31,6 @@ const DoctorList = () => {
 			const response = await DoctorFinder.get(`/name/${offset.current}/ASC`);
 			if (response.data.results !== 0) {
 				isLoading.current = false;
-				console.log("This is response.data.data.doctors");
-				console.log(response.data.data.doctors);
 				setDoctors((prevDoctors) => [
 					...prevDoctors,
 					...response.data.data.doctors,
@@ -67,8 +66,12 @@ const DoctorList = () => {
 					})}
 				</tbody>
 			</table>
-			{/* {isLoading.current}
-			{isLoading.current && <h3>Loading...</h3>} */}
+			{/* {!isLoading.current}
+			{!isLoading.current && (
+				<div style={{ position: "fixed", bottom: "20px" }}>
+					<h3>Scroll Down</h3>
+				</div>
+			)} */}
 		</div>
 	);
 };
