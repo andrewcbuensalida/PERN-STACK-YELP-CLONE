@@ -6,7 +6,7 @@ import UpdateDoctor from "./UpdateDoctor";
 import ReviewDoctor from "./ReviewDoctor";
 
 function DoctorInList({ doctor }) {
-	console.log("doctorinlist rendered");
+	console.log("individual rendered");
 	const { setDoctors } = useContext(DoctorsContext);
 	const [isUpdateSeen, setIsUpdateSeen] = useState(false);
 	const [isReviewSeen, setIsReviewSeen] = useState(false);

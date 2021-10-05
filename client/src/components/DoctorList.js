@@ -17,14 +17,10 @@ const DoctorList = () => {
 				try {
 					const response = await DoctorFinder.get(`/name/${offset}/ASC`);
 					if (response.data.results !== 0) {
-						if (response.data.results < 50) {
-							setDoctors((prevDoctors) => [
-								...prevDoctors,
-								...response.data.data.doctors,
-							]);
-						} else {
-							setDoctors(response.data.data.doctors); //?
-						}
+						setDoctors((prevDoctors) => [
+							...prevDoctors,
+							...response.data.data.doctors,
+						]);
 					}
 					isLoading.current = false; //?
 				} catch (err) {}
@@ -40,20 +36,7 @@ const DoctorList = () => {
 				document.documentElement.scrollHeight - 1000 &&
 			!isLoading.current
 		) {
-			console.log("offset");
-			console.log(offset);
-
-			console.log("scroll down");
 			setOffset((prev) => prev + 20);
-		} else if (
-			document.documentElement.scrollTop < 1000 &&
-			!isLoading.current &&
-			offset > 20
-		) {
-			console.log("offset");
-			console.log(offset);
-			console.log("scroll up");
-			setOffset((prev) => prev - 20);
 		}
 	};
 
