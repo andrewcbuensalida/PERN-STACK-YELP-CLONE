@@ -18,6 +18,7 @@ app.get("/api/v1/doctors/:orderby/:offset/:ascdesc", async (req, res) => {
 			"SELECT * FROM doctors LEFT JOIN (SELECT doctor_id, COUNT(*), TRUNC(AVG(rating),1) AS average_rating FROM reviews GROUP BY doctor_id) reviews ON doctors.id = reviews.doctor_id ORDER BY name OFFSET $1 LIMIT 40 ;",
 			[req.params.offset]
 		);
+
 		res.status(200).json({
 			status: "success",
 			results: doctorRatingsData.rows.length,
