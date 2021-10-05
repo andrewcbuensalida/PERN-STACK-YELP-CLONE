@@ -76,8 +76,6 @@ function DoctorInList({ doctor }) {
 			<td>{doctor.company}</td>
 			<td>{"$".repeat(doctor.price_range)}</td>
 			<td>
-				{console.log("avgrting")}
-				{console.log(averageRating)}
 				<Ratings count={count} averageRating={averageRating} />
 			</td>
 			<td>
