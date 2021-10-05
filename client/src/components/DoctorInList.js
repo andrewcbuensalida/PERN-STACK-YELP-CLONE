@@ -7,7 +7,7 @@ import ReviewDoctor from "./ReviewDoctor";
 
 function DoctorInList({ doctor, setDoctors }) {
 	console.log("individual rendered");
-	console.log(doctor);
+	// console.log(doctor);
 	const [isUpdateSeen, setIsUpdateSeen] = useState(false);
 	const [isReviewSeen, setIsReviewSeen] = useState(false);
 	const [reviews, setReviews] = useState([]);
@@ -18,6 +18,7 @@ function DoctorInList({ doctor, setDoctors }) {
 		Number(doctor.average_rating)
 	);
 	useEffect(() => {
+		console.log("in use effecttttt");
 		const fetchData = async () => {
 			try {
 				const response = await DoctorFinder.get(`/${doctor.id}`);
@@ -35,8 +36,8 @@ function DoctorInList({ doctor, setDoctors }) {
 		try {
 			await DoctorFinder.delete(`/${id}`);
 			setDoctors((prevDoctors) =>
-				prevDoctors.filter((doctorFromContext) => {
-					return doctorFromContext.id !== id;
+				prevDoctors.filter((doc) => {
+					return doc.id !== id;
 				})
 			);
 		} catch (err) {

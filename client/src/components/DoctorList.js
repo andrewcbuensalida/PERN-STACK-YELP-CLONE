@@ -4,9 +4,7 @@ import { DoctorsContext } from "../context/DoctorsContext";
 import DoctorInList from "./DoctorInList";
 // import useDoctors from "../hooks/useDoctors";
 const DoctorList = () => {
-	const [doctors, setDoctors] = useState([]);
-	// const [offset, setOffset] = useState(0);
-	// const [isLoading, setIsLoading] = useState(false);
+	const { doctors, setDoctors } = useContext(DoctorsContext);
 	const isLoading = useRef(false);
 	const offset = useRef(0);
 	console.log("doctor list rendered");

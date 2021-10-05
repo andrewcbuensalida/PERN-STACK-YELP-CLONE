@@ -33,11 +33,11 @@ app.get("/api/v1/doctors/:orderby/:offset/:ascdesc", async (req, res) => {
 //Get a doctor
 app.get("/api/v1/doctors/:id", async (req, res) => {
 	try {
-		const doctor = await db.query(
-			"select * from doctors left join (select doctor_id, COUNT(*), TRUNC(AVG(rating),1) as average_rating from reviews group by doctor_id) reviews on doctors.id = reviews.doctor_id where id = $1",
-			[req.params.id]
-		);
-		// select * from doctors wehre id = req.params.id
+		// const doctor = await db.query(
+		// 	"select * from doctors left join (select doctor_id, COUNT(*), TRUNC(AVG(rating),1) as average_rating from reviews group by doctor_id) reviews on doctors.id = reviews.doctor_id where id = $1",
+		// 	[req.params.id]
+		// );
+		// // select * from doctors wehre id = req.params.id
 
 		const reviews = await db.query(
 			"select * from reviews where doctor_id = $1",
@@ -46,7 +46,7 @@ app.get("/api/v1/doctors/:id", async (req, res) => {
 		res.status(200).json({
 			status: "succes",
 			data: {
-				doctor: doctor.rows[0],
+				// doctor: doctor.rows[0],
 				reviews: reviews.rows,
 			},
 		});
