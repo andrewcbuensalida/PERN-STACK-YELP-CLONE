@@ -29,7 +29,9 @@ const DoctorList = () => {
 		try {
 			const response = await DoctorFinder.get(`/name/${offset.current}/ASC`);
 			if (response.data.results !== 0) {
-				isLoading.current = false; //?
+				isLoading.current = false;
+				console.log("This is response.data.data.doctors");
+				console.log(response.data.data.doctors);
 				setDoctors((prevDoctors) => [
 					...prevDoctors,
 					...response.data.data.doctors,

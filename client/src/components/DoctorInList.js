@@ -33,8 +33,8 @@ function DoctorInList({ doctor, setDoctors }) {
 	const handleDelete = async (e, id) => {
 		e.stopPropagation();
 		try {
-			await DoctorFinder.delete(`/${id}`);
 			setIsDoctorSeen(false);
+			await DoctorFinder.delete(`/${id}`);
 		} catch (err) {
 			console.log(err);
 		}
@@ -59,8 +59,8 @@ function DoctorInList({ doctor, setDoctors }) {
 				onClick={(e) => handleDoctorSelect(e)}
 				key={doctor.id}
 			>
-				{console.log("reviews in return")}
-				{console.log(reviews)}
+				{/* {console.log("reviews in return")}
+				{console.log(reviews)} */}
 				<ReviewDoctor
 					isReviewSeen={isReviewSeen}
 					setIsReviewSeen={setIsReviewSeen}
