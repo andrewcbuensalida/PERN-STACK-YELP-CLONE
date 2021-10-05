@@ -28,15 +28,14 @@ const DoctorList = () => {
 		isLoading.current = true; //?
 		try {
 			const response = await DoctorFinder.get(`/name/${offset.current}/ASC`);
-			console.log("response");
-			console.log(response);
 			if (response.data.results !== 0) {
+				isLoading.current = false; //?
 				setDoctors((prevDoctors) => [
 					...prevDoctors,
 					...response.data.data.doctors,
 				]);
 			}
-			isLoading.current = false; //?
+			// isLoading.current = false; //?
 			offset.current += 40;
 		} catch (err) {}
 	};
@@ -66,6 +65,8 @@ const DoctorList = () => {
 					})}
 				</tbody>
 			</table>
+			{/* {isLoading.current}
+			{isLoading.current && <h3>Loading...</h3>} */}
 		</div>
 	);
 };

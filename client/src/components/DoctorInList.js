@@ -6,19 +6,18 @@ import UpdateDoctor from "./UpdateDoctor";
 import ReviewDoctor from "./ReviewDoctor";
 
 function DoctorInList({ doctor, setDoctors }) {
-	console.log("individual rendered");
 	// console.log(doctor);
 	const [isUpdateSeen, setIsUpdateSeen] = useState(false);
 	const [isReviewSeen, setIsReviewSeen] = useState(false);
-	const [reviews, setReviews] = useState([]);
+	const [reviews, setReviews] = useState(null);
 	doctor.count = doctor.count || 0;
 	const [count, setCount] = useState(Number(doctor.count));
 	doctor.average_rating = doctor.average_rating || 0;
 	const [averageRating, setAverageRating] = useState(
 		Number(doctor.average_rating)
 	);
+
 	useEffect(() => {
-		console.log("in use effecttttt");
 		const fetchData = async () => {
 			try {
 				const response = await DoctorFinder.get(`/${doctor.id}`);
@@ -27,7 +26,6 @@ function DoctorInList({ doctor, setDoctors }) {
 				console.log(err);
 			}
 		};
-
 		fetchData();
 	}, []);
 
@@ -53,52 +51,57 @@ function DoctorInList({ doctor, setDoctors }) {
 	const handleDoctorSelect = (e) => {
 		setIsReviewSeen(true);
 	};
+	console.log("individual rendered");
 
 	return (
-		<tr
-			id={doctor.id}
-			style={{ cursor: "pointer" }}
-			onClick={(e) => handleDoctorSelect(e)}
-			key={doctor.id}
-		>
-			<ReviewDoctor
-				isReviewSeen={isReviewSeen}
-				setIsReviewSeen={setIsReviewSeen}
-				doctor={doctor}
-				reviews={reviews}
-				setReviews={setReviews}
-				count={count}
-				setCount={setCount}
-				averageRating={averageRating}
-				setAverageRating={setAverageRating}
-			/>
-
-			<td>{doctor.name}</td>
-			<td>{doctor.company}</td>
-			<td>{"$".repeat(doctor.price_range)}</td>
-			<td>
-				<Ratings count={count} averageRating={averageRating} />
-			</td>
-			<td>
-				<button onClick={(e) => handleUpdate(e)} className="btn btn-warning">
-					Update
-				</button>
-
-				<UpdateDoctor
-					isUpdateSeen={isUpdateSeen}
-					setIsUpdateSeen={setIsUpdateSeen}
+		reviews && (
+			<tr
+				id={doctor.id}
+				style={{ cursor: "pointer" }}
+				onClick={(e) => handleDoctorSelect(e)}
+				key={doctor.id}
+			>
+				{console.log("reviews in return")}
+				{console.log(reviews)}
+				<ReviewDoctor
+					isReviewSeen={isReviewSeen}
+					setIsReviewSeen={setIsReviewSeen}
 					doctor={doctor}
+					reviews={reviews}
+					setReviews={setReviews}
+					count={count}
+					setCount={setCount}
+					averageRating={averageRating}
+					setAverageRating={setAverageRating}
 				/>
-			</td>
-			<td>
-				<button
-					onClick={(e) => handleDelete(e, doctor.id)}
-					className="btn btn-danger"
-				>
-					Delete
-				</button>
-			</td>
-		</tr>
+
+				<td>{doctor.name}</td>
+				<td>{doctor.company}</td>
+				<td>{"$".repeat(doctor.price_range)}</td>
+				<td>
+					<Ratings count={count} averageRating={averageRating} />
+				</td>
+				<td>
+					<button onClick={(e) => handleUpdate(e)} className="btn btn-warning">
+						Update
+					</button>
+
+					<UpdateDoctor
+						isUpdateSeen={isUpdateSeen}
+						setIsUpdateSeen={setIsUpdateSeen}
+						doctor={doctor}
+					/>
+				</td>
+				<td>
+					<button
+						onClick={(e) => handleDelete(e, doctor.id)}
+						className="btn btn-danger"
+					>
+						Delete
+					</button>
+				</td>
+			</tr>
+		)
 	);
 }
 
