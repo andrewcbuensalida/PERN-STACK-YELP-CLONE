@@ -8,7 +8,7 @@ const DoctorList = () => {
 	const { doctors, setDoctors } = useContext(DoctorsContext);
 	const offset = useRef(0);
 	console.log("doctor list rendered");
-	const [count, setCount] = useState({ prev: 0, next: 10 });
+	const [count, setCount] = useState({ prev: 0, next: 40 });
 	const [hasMore, setHasMore] = useState(true);
 	const [current, setCurrent] = useState(doctors.slice(count.prev, count.next));
 
@@ -21,10 +21,10 @@ const DoctorList = () => {
 			setHasMore(false);
 			return;
 		}
-		setCurrent(current.concat(doctors.slice(count.prev + 10, count.next + 10)));
+		setCurrent(current.concat(doctors.slice(count.prev + 40, count.next + 40)));
 		setCount((prevState) => ({
-			prev: prevState.prev + 10,
-			next: prevState.next + 10,
+			prev: prevState.prev + 40,
+			next: prevState.next + 40,
 		}));
 	};
 
