@@ -47,3 +47,5 @@ when inspecting facebook, when scrolling, just the new divs flash, not the old, 
 order goes functions, then set states batched together because it's async, but if theres a conflic, most recent one wins, which is opposite of normal programming, then effect?
 
 shouldnt call setstate in the body of a component. cant call hook like useSomething in useEffect
+
+even if context changed in one route, it didnt rerender another route using that same context.

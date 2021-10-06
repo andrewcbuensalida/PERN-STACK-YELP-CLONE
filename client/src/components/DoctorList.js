@@ -1,46 +1,50 @@
 import React, { useEffect, useContext, useState, useRef } from "react";
+import InfiniteScroll from "react-infinite-scroll-component";
 import DoctorFinder from "../apis/DoctorFinder";
 import { DoctorsContext } from "../context/DoctorsContext";
 import DoctorInList from "./DoctorInList";
 // import useDoctors from "../hooks/useDoctors";
 const DoctorList = () => {
 	const { doctors, setDoctors } = useContext(DoctorsContext);
-	const isLoading = useRef(false);
 	const offset = useRef(0);
 	console.log("doctor list rendered");
+	const [count, setCount] = useState({ prev: 0, next: 10 });
+	const [hasMore, setHasMore] = useState(true);
+	const [current, setCurrent] = useState(doctors.slice(count.prev, count.next));
 
 	useEffect(() => {
-		window.addEventListener("scroll", handleScroll);
 		fetchDoctors();
-		// return () => window.removeEventListener("scroll", handleScroll);
-	}, []);
+	}, [doctors]);
 
-	const handleScroll = () => {
-		if (
-			document.documentElement.scrollTop >
-				document.documentElement.scrollHeight - 1500 &&
-			!isLoading.current
-		) {
-			fetchDoctors();
+	const getMoreData = () => {
+		if (current.length === doctors.length) {
+			setHasMore(false);
+			return;
 		}
+
+		setCurrent(current.concat(doctors.slice(count.prev + 10, count.next + 10)));
+
+		setCount((prevState) => ({
+			prev: prevState.prev + 10,
+			next: prevState.next + 10,
+		}));
 	};
 
 	const fetchDoctors = async () => {
-		isLoading.current = true; //?
 		try {
 			const response = await DoctorFinder.get(`/name/${offset.current}/ASC`);
-			if (response.data.results !== 0) {
-				isLoading.current = false;
-				setDoctors((prevDoctors) => [
-					...prevDoctors,
-					...response.data.data.doctors,
-				]);
-			}
-			// isLoading.current = false; //?
-			offset.current += 40;
+			setDoctors((prevDoctors) => {
+				return [...prevDoctors, ...response.data.data.doctors];
+			});
+			setCurrent(doctors.slice(count.prev, count.next));
 		} catch (err) {}
+		// } finally {
+		// 	setCurrent(doctors.slice(count.prev, count.next));
+		// }
 	};
 
+	console.log("This is current");
+	console.log(current);
 	return (
 		<div className="list-group">
 			<table className="table table-hover table-dark">
@@ -55,23 +59,26 @@ const DoctorList = () => {
 					</tr>
 				</thead>
 				<tbody>
-					{doctors.map((doctor) => {
-						return (
-							<DoctorInList
-								key={doctor.id}
-								doctor={doctor}
-								setDoctors={setDoctors}
-							/>
-						);
-					})}
+					{" "}
+					<InfiniteScroll
+						dataLength={current.length}
+						next={getMoreData}
+						hasMore={hasMore}
+						loader={<h4>Fetching...</h4>}
+					>
+						<div>
+							{current &&
+								current.map((doctor) => (
+									<DoctorInList
+										key={doctor.id}
+										doctor={doctor}
+										setDoctors={setDoctors}
+									/>
+								))}
+						</div>
+					</InfiniteScroll>
 				</tbody>
 			</table>
-			{/* {!isLoading.current}
-			{!isLoading.current && (
-				<div style={{ position: "fixed", bottom: "20px" }}>
-					<h3>Scroll Down</h3>
-				</div>
-			)} */}
 		</div>
 	);
 };
