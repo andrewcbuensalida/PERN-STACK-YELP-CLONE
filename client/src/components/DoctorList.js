@@ -18,7 +18,7 @@ const DoctorList = () => {
 	const handleScroll = () => {
 		if (
 			document.documentElement.scrollTop >
-				document.documentElement.scrollHeight - 1000 &&
+				document.documentElement.scrollHeight - 1500 &&
 			!isLoading.current
 		) {
 			fetchDoctors();

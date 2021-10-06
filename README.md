@@ -45,3 +45,5 @@ its very important where state is declared. if its too low down the tree, only t
 when inspecting facebook, when scrolling, just the new divs flash, not the old, so i thought they append the new elements. but upon inspecting my app which renders the whole list of data with every new element, just the new divs flash as well. so now i dont know if fb appends new elements or something else. also after inspecting my own app which, in the console, says it rerenders every entry, in the elements however, only new entries appear after scrolling.
 
 order goes functions, then set states batched together because it's async, but if theres a conflic, most recent one wins, which is opposite of normal programming, then effect?
+
+shouldnt call setstate in the body of a component. cant call hook like useSomething in useEffect
