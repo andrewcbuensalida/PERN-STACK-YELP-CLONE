@@ -47,3 +47,5 @@ when inspecting facebook, when scrolling, just the new divs flash, not the old, 
 order goes functions, then set states batched together because it's async, but if theres a conflic, most recent one wins, which is opposite of normal programming, then effect?
 
 shouldnt call setstate in the body of a component. cant call hook like useSomething in useEffect
+
+infinite scroll component works,takes exactly 45 seconds to load 950 records. baseically it prefetches all the data, then when you scroll down, it appends to the render list. for some reason all of the previous records gets rerendered. probable due to the map function. the scroll height method takes the same time, assuming both are on fast internet. i guess theres a trade off of speed and memory. and if the user waits in the beginning vs during. for slower internet, 2 minutes for the scroll height method.
