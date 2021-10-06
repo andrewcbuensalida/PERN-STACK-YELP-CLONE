@@ -38,9 +38,6 @@ const DoctorList = () => {
 				return [...prevDoctors, ...response.data.data.doctors];
 			});
 		} catch (err) {}
-		// } finally {
-		// 	setCurrent(doctors.slice(count.prev, count.next));
-		// }
 	};
 
 	return (

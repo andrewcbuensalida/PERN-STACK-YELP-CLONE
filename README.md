@@ -49,3 +49,4 @@ order goes functions, then set states batched together because it's async, but i
 shouldnt call setstate in the body of a component. cant call hook like useSomething in useEffect
 
 even if context changed in one route, it didnt rerender another route using that same context.
+infinite scroll component works, takes about a minute to load 950 records. baseically it prefetches all the data, then when you scroll down, it appends to the render list. for some reason all of the previous records gets rerendered. probable due to the map function. the built in scroll height method takes half the time.
