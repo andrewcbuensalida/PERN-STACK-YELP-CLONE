@@ -70,17 +70,19 @@ function DoctorInList({ doctor, setDoctors }) {
 				>
 					{/* {console.log("reviews in return")}
 				{console.log(reviews)} */}
-					<ReviewDoctor
-						isReviewSeen={isReviewSeen}
-						setIsReviewSeen={setIsReviewSeen}
-						doctor={doctor}
-						reviews={reviews}
-						setReviews={setReviews}
-						count={count}
-						setCount={setCount}
-						averageRating={averageRating}
-						setAverageRating={setAverageRating}
-					/>
+					{isReviewSeen && (
+						<ReviewDoctor
+							isReviewSeen={isReviewSeen}
+							setIsReviewSeen={setIsReviewSeen}
+							doctor={doctor}
+							reviews={reviews}
+							setReviews={setReviews}
+							count={count}
+							setCount={setCount}
+							averageRating={averageRating}
+							setAverageRating={setAverageRating}
+						/>
+					)}
 
 					<td>{doctor.name}</td>
 					<td>{doctor.company}</td>
@@ -95,12 +97,13 @@ function DoctorInList({ doctor, setDoctors }) {
 						>
 							Update
 						</button>
-
-						<UpdateDoctor
-							isUpdateSeen={isUpdateSeen}
-							setIsUpdateSeen={setIsUpdateSeen}
-							doctor={doctor}
-						/>
+						{isUpdateSeen && (
+							<UpdateDoctor
+								isUpdateSeen={isUpdateSeen}
+								setIsUpdateSeen={setIsUpdateSeen}
+								doctor={doctor}
+							/>
+						)}
 					</td>
 					<td>
 						<button
