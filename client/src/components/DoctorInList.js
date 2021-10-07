@@ -63,10 +63,8 @@ function DoctorInList({ doctor, setDoctors }) {
 		return (
 			isDoctorSeen && (
 				<tr
-					id={doctor.id}
 					style={{ cursor: "pointer" }}
 					onClick={(e) => handleDoctorSelect(e)}
-					key={doctor.id}
 				>
 					{/* {console.log("reviews in return")}
 				{console.log(reviews)} */}
