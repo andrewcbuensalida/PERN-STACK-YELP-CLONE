@@ -72,7 +72,6 @@ function DoctorInList({ doctor, setDoctors }) {
 				{console.log(reviews)} */}
 					{isReviewSeen && (
 						<ReviewDoctor
-							isReviewSeen={isReviewSeen}
 							setIsReviewSeen={setIsReviewSeen}
 							doctor={doctor}
 							reviews={reviews}

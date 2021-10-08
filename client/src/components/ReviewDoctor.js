@@ -1,11 +1,9 @@
 import React, { useState, useEffect } from "react";
-import Modal from "react-bootstrap/Modal";
 import DoctorFinder from "../apis/DoctorFinder";
 import StarRating from "./StarRating";
 import Reviews from "./Reviews";
 
 const ReviewDoctor = ({
-	isReviewSeen,
 	doctor,
 	reviews,
 	setIsReviewSeen,
@@ -29,13 +27,10 @@ const ReviewDoctor = ({
 			});
 			count++;
 			setCount(count);
-
 			setReviews((prevReviews) => [...prevReviews, response.data.data.review]);
-
 			setAverageRating((prev) => {
 				return (prev * (count - 1)) / count + Number(rating) * (1 / count);
 			});
-
 			setName("");
 			setRating("Rating");
 			setReviewText("");
@@ -45,7 +40,6 @@ const ReviewDoctor = ({
 	return (
 		<div
 			style={{
-				display: isReviewSeen ? "block" : "none",
 				position: "fixed",
 				left: "0",
 				right: "0",
