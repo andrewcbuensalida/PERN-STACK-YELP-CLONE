@@ -24,7 +24,6 @@ echo "Finished running server"
 cd /home/ubuntu/doctordb/client
 npm ci
 # npm run build
-# npm install -g serve
 echo "Finished installing client"
 # serve -s build > app.out.log 2> app.err.log < /dev/null &
 pm2 serve build --name doctordb_react
