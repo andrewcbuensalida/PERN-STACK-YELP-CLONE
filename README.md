@@ -71,6 +71,8 @@ order by
     count 
 desc;
 
+have to change axios to a different path.
+
 code pipeline, install code deploy manually first.
 ss -tnlp | grep "node /" to see what ports pm2 processes are running on.
 
