@@ -116,3 +116,5 @@ to exit out of postgres, \q, which will .. just watch this to install and import
  https://www.youtube.com/watch?v=NjYsXuSBZ5U
 
 then manually create the .env in the server directory so node can log into psql.
+
+had to globally instead react-scripts if i wanted to npm run build during code deploy.
