@@ -73,7 +73,6 @@ desc;
 
 have to change axios to a different path.
 
-code pipeline, install code deploy manually first.
 ss -tnlp | grep "node /" to see what ports pm2 processes are running on.
 
 make sure when copy pasting stuff from vs code to ec2 connect, paste it in the url first, then copy from there and paste.
