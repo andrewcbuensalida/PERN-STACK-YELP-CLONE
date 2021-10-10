@@ -117,4 +117,10 @@ to exit out of postgres, \q, which will .. just watch this to install and import
 
 then manually create the .env in the server directory so node can log into psql.
 
-had to globally instead react-scripts if i wanted to npm run build during code deploy.
+seems that react build folder already contains node_modules
+
+npm ci to install exactly the same version
+npm i --prefer-offline to not install if it's in cache, this doesnt work with npm ci
+npm i --production to not install devdependencies, this works with npm ci
+
+since could build during the deploy, have to build locally, then push to github. the react-scripts folder in the node_modules is empty, so i tried npm i react-scripts, but ends up crashing the instance. 

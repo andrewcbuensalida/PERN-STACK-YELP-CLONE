@@ -9,17 +9,17 @@ export NVM_DIR="$HOME/.nvm"
 [ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # loads nvm bash_completion (node is in path now)
 
 #navigate into client directory
-cd /home/ubuntu/doctordb/client
-npm ci --production
+# cd /home/ubuntu/doctordb/client
+# npm i --production --prefer-offline
 # npm run build
-echo "Finished installing client"
+# echo "Finished installing client"
 # serve -s build > app.out.log 2> app.err.log < /dev/null &
 
 #navigate into our working directory where we have all our github files
 cd /home/ubuntu/doctordb/server
 
 #install node modules
-npm ci --production
+npm i --production --prefer-offline
 echo "Finished installing server"
 
 #start our node app in the background, exchanged app with script
