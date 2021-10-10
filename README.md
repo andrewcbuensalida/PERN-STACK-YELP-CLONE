@@ -70,3 +70,36 @@ group by
 order by
     count 
 desc;
+
+code pipeline, install code deploy manually first.
+ss -tnlp | grep "node /" to see what ports pm2 processes are running on.
+
+make sure when copy pasting stuff from vs code to ec2 connect, paste it in the url first, then copy from there and paste.
+
+to install nginx https://ubuntu.com/tutorials/install-and-configure-nginx#2-installing-nginx
+test by going to http (not https) of your ip address
+to configure nginx to proxy to react, https://www.sitepoint.com/configuring-nginx-ssl-node-js/
+server {
+  listen       80;
+  server_name  localhost;
+
+  location / {
+    proxy_pass http://localhost:3000;
+    proxy_http_version 1.1;
+    proxy_set_header Upgrade $http_upgrade;
+    proxy_set_header Connection 'upgrade';
+    proxy_set_header Host $host;
+    proxy_cache_bypass $http_upgrade;
+  }
+}
+important commands:
+sudo systemctl status nginx
+sudo nano /etc/nginx/sites-available/default
+sudo nginx -t  //to check if its alright
+sudo service nginx restart
+now can go to ip address without the :3000 at the end.
+
+to install postgres on ubuntu, postgres automatically creates a user called postgres.
+switch to that user with sudo -i -u postgres
+now run psql
+to exit out of postgres, \q, which will .. just watch this https://www.youtube.com/watch?v=NjYsXuSBZ5U
