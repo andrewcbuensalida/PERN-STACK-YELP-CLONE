@@ -91,6 +91,15 @@ server {
     proxy_set_header Host $host;
     proxy_cache_bypass $http_upgrade;
   }
+    location /api {
+    proxy_pass http://localhost:3001;
+    proxy_http_version 1.1;
+    proxy_set_header Upgrade $http_upgrade;
+    proxy_set_header Connection 'upgrade';
+    proxy_set_header Host $host;
+    proxy_cache_bypass $http_upgrade;
+  }
+  
 }
 important commands:
 sudo systemctl status nginx
@@ -102,4 +111,7 @@ now can go to ip address without the :3000 at the end.
 to install postgres on ubuntu, postgres automatically creates a user called postgres.
 switch to that user with sudo -i -u postgres
 now run psql
-to exit out of postgres, \q, which will .. just watch this https://www.youtube.com/watch?v=NjYsXuSBZ5U
+to exit out of postgres, \q, which will .. just watch this to install and import data into postgres
+ https://www.youtube.com/watch?v=NjYsXuSBZ5U
+
+then manually create the .env in the server directory so node can log into psql.
