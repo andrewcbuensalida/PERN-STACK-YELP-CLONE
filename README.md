@@ -81,26 +81,24 @@ to install nginx https://ubuntu.com/tutorials/install-and-configure-nginx#2-inst
 test by going to http (not https) of your ip address
 to configure nginx to proxy to react, https://www.sitepoint.com/configuring-nginx-ssl-node-js/
 server {
-  listen       80;
-  server_name  localhost;
+listen 80;
+listen [::]:80;
 
-  location / {
-    proxy_pass http://localhost:3000;
-    proxy_http_version 1.1;
-    proxy_set_header Upgrade $http_upgrade;
-    proxy_set_header Connection 'upgrade';
-    proxy_set_header Host $host;
-    proxy_cache_bypass $http_upgrade;
-  }
-    location /api {
-    proxy_pass http://localhost:3001;
-    proxy_http_version 1.1;
-    proxy_set_header Upgrade $http_upgrade;
-    proxy_set_header Connection 'upgrade';
-    proxy_set_header Host $host;
-    proxy_cache_bypass $http_upgrade;
-  }
-  
+root /home/ubuntu/doctordb/client/build;
+index index.html index.htm index.nginx-debian.html;
+server_name anhonestobserver.com www.anhonestobserver.com <ip address really important>;
+location / {
+try_files $uri $uri /index.html;
+}
+
+location /api {
+proxy_pass http://localhost:3001;
+proxy_http_version 1.1;
+proxy_set_header Upgrade $http_upgrade;
+proxy_set_header Connection 'upgrade';
+proxy_set_header Host $host;
+proxy_cache_bypass $http_upgrade;
+}
 }
 important commands:
 sudo systemctl status nginx
@@ -116,6 +114,7 @@ to exit out of postgres, \q, which will .. just watch this to install and import
  https://www.youtube.com/watch?v=NjYsXuSBZ5U
 
 then manually create the .env in the server directory so node can log into psql.
+could probably also do the global .env method.
 
 seems that react build folder already contains node_modules
 
