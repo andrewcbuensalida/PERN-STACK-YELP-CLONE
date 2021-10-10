@@ -114,14 +114,18 @@ to exit out of postgres, \q, which will .. just watch this to install and import
  https://www.youtube.com/watch?v=NjYsXuSBZ5U
 
 then manually create the .env in the server directory so node can log into psql.
-could probably also do the global .env method.
+could probably also do the global .env method. remember to delete and start the pm2 after this.
 
 seems that react build folder already contains node_modules
 
 npm ci to install exactly the same version
 npm i --prefer-offline to not install if it's in cache, this doesnt work with npm ci
 npm i --production to not install devdependencies, this works with npm ci
+use this one npm i --prefer-offline --production for the server
 
 since could build during the deploy, have to build locally, then push to github. the react-scripts folder in the node_modules is empty, so i tried npm i react-scripts, but ends up crashing the instance. 
 
 pm2 is weird. if in the ~ folder, doing pm2 start /home/ubuntu/doctordb/server/server.js says it worked and is online, but when i go to the site, it doesnt work. but if in the doctordb/server folder, it works.
+
+in the code deploy scripts, dont need to stop and start pm2 because if watch is enabled, pm2 automatically restarts when there are changes made from code pipeline.
+
