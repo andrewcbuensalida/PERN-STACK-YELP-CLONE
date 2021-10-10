@@ -123,3 +123,5 @@ npm i --prefer-offline to not install if it's in cache, this doesnt work with np
 npm i --production to not install devdependencies, this works with npm ci
 
 since could build during the deploy, have to build locally, then push to github. the react-scripts folder in the node_modules is empty, so i tried npm i react-scripts, but ends up crashing the instance. 
+
+pm2 is weird. if in the ~ folder, doing pm2 start /home/ubuntu/doctordb/server/server.js says it worked and is online, but when i go to the site, it doesnt work. but if in the doctordb/server folder, it works.
