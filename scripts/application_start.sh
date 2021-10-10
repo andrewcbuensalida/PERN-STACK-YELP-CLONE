@@ -10,8 +10,8 @@ export NVM_DIR="$HOME/.nvm"
 
 #navigate into client directory
 cd /home/ubuntu/doctordb/client
-npm ci
-npm run build
+npm ci --production
+# npm run build
 echo "Finished installing client"
 # serve -s build > app.out.log 2> app.err.log < /dev/null &
 
@@ -19,7 +19,7 @@ echo "Finished installing client"
 cd /home/ubuntu/doctordb/server
 
 #install node modules
-npm ci
+npm ci --production
 echo "Finished installing server"
 
 #start our node app in the background, exchanged app with script
