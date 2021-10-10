@@ -26,4 +26,4 @@ npm ci
 # npm run build
 echo "Finished installing client"
 # serve -s build > app.out.log 2> app.err.log < /dev/null &
-/home/ubuntu/.nvm/versions/node/v16.11.0/bin/pm2 serve build --name doctordb_react --port 3000 > app.out.log 2> app.err.log < /dev/null &
+# /home/ubuntu/.nvm/versions/node/v16.11.0/bin/pm2 serve build --name doctordb_react --port 3000 > app.out.log 2> app.err.log < /dev/null &
