@@ -8,7 +8,9 @@ cd /home/ubuntu
 wget https://aws-codedeploy-us-east-1.s3.amazonaws.com/latest/install
 sudo chmod +x ./install
 sudo ./install auto
-
+curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.34.0/install.sh | bash
+. ~/.nvm/nvm.sh
+nvm install node
 
 Check if CodeDeploy agent is running:
 
