@@ -17,7 +17,7 @@ echo "Finished installing server"
 
 #start our node app in the background, exchanged app with script
 # node app.js > app.out.log 2> app.err.log < /dev/null & 
-/home/ubuntu/.nvm/versions/node/v16.11.0/bin/pm2 start server.js --name doctordb_node > app.out.log 2> app.err.log < /dev/null &
+/home/ubuntu/.nvm/versions/node/v16.11.0/bin/pm2 start server.js --name doctordb_node
 # echo "Finished running server"
 
 #navigate into client directory
