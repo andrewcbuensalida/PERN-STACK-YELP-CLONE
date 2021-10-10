@@ -102,7 +102,7 @@ proxy_cache_bypass $http_upgrade;
 }
 important commands:
 sudo systemctl status nginx
-sudo nano /etc/nginx/sites-available/default
+sudo nano /etc/nginx/sites-available/tech.anhonestobserver.com
 sudo nginx -t  //to check if its alright
 sudo service nginx restart
 now can go to ip address without the :3000 at the end.
