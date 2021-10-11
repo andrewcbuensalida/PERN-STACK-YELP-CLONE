@@ -80,18 +80,20 @@ make sure when copy pasting stuff from vs code to ec2 connect, paste it in the u
 to install nginx https://ubuntu.com/tutorials/install-and-configure-nginx#2-installing-nginx
 test by going to http (not https) of your ip address
 to configure nginx to proxy to react, https://www.sitepoint.com/configuring-nginx-ssl-node-js/
+
 server {
 listen 80;
 listen [::]:80;
 
 root /home/ubuntu/doctordb/client/build;
 index index.html index.htm index.nginx-debian.html;
-server_name anhonestobserver.com www.anhonestobserver.com <ip address really important>;
+server_name doctordb.anhonestobserver.com www.doctordb.anhonestobserver.com 54.219.56.20;
+
 location / {
-try_files $uri $uri /index.html;
+try_files $uri /index.html;
 }
 
-location /api {
+location /api { 
 proxy_pass http://localhost:3001;
 proxy_http_version 1.1;
 proxy_set_header Upgrade $http_upgrade;
@@ -100,6 +102,7 @@ proxy_set_header Host $host;
 proxy_cache_bypass $http_upgrade;
 }
 }
+this works. no need for pm2 for react. clients can access through doctordb.anhonestobserver.com. couldnt get anhonestobserver.com/doctordb to work though.
 important commands:
 sudo systemctl status nginx
 sudo nano /etc/nginx/sites-available/tech.anhonestobserver.com
@@ -123,27 +126,10 @@ npm i --prefer-offline to not install if it's in cache, this doesnt work with np
 npm i --production to not install devdependencies, this works with npm ci
 use this one npm i --prefer-offline --production for the server
 
-since could build during the deploy, have to build locally, then push to github. the react-scripts folder in the node_modules is empty, so i tried npm i react-scripts, but ends up crashing the instance. 
+since couldnt build during the deploy, have to build locally, then push to github. the react-scripts folder in the node_modules is empty, so i tried npm i react-scripts, but ends up crashing the instance. 
 
 pm2 is weird. if in the ~ folder, doing pm2 start /home/ubuntu/doctordb/server/server.js says it worked and is online, but when i go to the site, it doesnt work. but if in the doctordb/server folder, it works.
 
 in the code deploy scripts, dont need to stop and start pm2 because if watch is enabled, pm2 automatically restarts when there are changes made from code pipeline.
 
-
-for nginx, try 
-location /doctordb {
-    root /home/ubuntu/doctordb/client/build;
-    index index.html
-}
-
-try
-location /doctordb {
-    proxy_pass http://localhost:3000;
-}
-location /doctordb/api/ {
-    proxy_pass http://localhost:3001/doctordb/api/;
-}
-then in doctor finder api, http://localhost:3000/doctordb/api/v1/doctors or with the ip address
-https://docs.nginx.com/nginx/admin-guide/web-server/reverse-proxy/
-
-put .conf at the end of file
+to get ssl https certified, https://certbot.eff.org/lets-encrypt/ubuntufocal-nginx

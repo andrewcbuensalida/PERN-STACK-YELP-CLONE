@@ -11,32 +11,29 @@ app.use(cors());
 app.use(express.json());
 
 // Get all doctors
-app.get(
-	"/doctordb/api/v1/doctors/:orderby/:offset/:ascdesc",
-	async (req, res) => {
-		console.log("hello 2");
-		try {
-			//const results = await db.query("select * from doctors");
-			const doctorRatingsData = await db.query(
-				"SELECT * FROM doctors LEFT JOIN (SELECT doctor_id, COUNT(*), TRUNC(AVG(rating),1) AS average_rating FROM reviews GROUP BY doctor_id) reviews ON doctors.id = reviews.doctor_id ORDER BY name OFFSET $1 LIMIT 40 ;",
-				[req.params.offset]
-			);
+app.get("/api/v1/doctors/:orderby/:offset/:ascdesc", async (req, res) => {
+	console.log("hello 3");
+	try {
+		//const results = await db.query("select * from doctors");
+		const doctorRatingsData = await db.query(
+			"SELECT * FROM doctors LEFT JOIN (SELECT doctor_id, COUNT(*), TRUNC(AVG(rating),1) AS average_rating FROM reviews GROUP BY doctor_id) reviews ON doctors.id = reviews.doctor_id ORDER BY name OFFSET $1 LIMIT 40 ;",
+			[req.params.offset]
+		);
 
-			res.status(200).json({
-				status: "success",
-				results: doctorRatingsData.rows.length,
-				data: {
-					doctors: doctorRatingsData.rows,
-				},
-			});
-		} catch (err) {
-			console.log(err);
-		}
+		res.status(200).json({
+			status: "success",
+			results: doctorRatingsData.rows.length,
+			data: {
+				doctors: doctorRatingsData.rows,
+			},
+		});
+	} catch (err) {
+		console.log(err);
 	}
-);
+});
 
 //Get a doctor
-app.get("/doctordb/api/v1/doctors/:id", async (req, res) => {
+app.get("/api/v1/doctors/:id", async (req, res) => {
 	try {
 		// const doctor = await db.query(
 		// 	"select * from doctors left join (select doctor_id, COUNT(*), TRUNC(AVG(rating),1) as average_rating from reviews group by doctor_id) reviews on doctors.id = reviews.doctor_id where id = $1",
@@ -62,7 +59,7 @@ app.get("/doctordb/api/v1/doctors/:id", async (req, res) => {
 
 // Create a doctor
 
-app.post("/doctordb/api/v1/doctors", async (req, res) => {
+app.post("/api/v1/doctors", async (req, res) => {
 	try {
 		const results = await db.query(
 			"INSERT INTO doctors (name, company, price_range) values ($1, $2, $3) returning *",
@@ -81,7 +78,7 @@ app.post("/doctordb/api/v1/doctors", async (req, res) => {
 
 // Update doctors
 
-app.put("/doctordb/api/v1/doctors/:id", async (req, res) => {
+app.put("/api/v1/doctors/:id", async (req, res) => {
 	try {
 		const results = await db.query(
 			"UPDATE doctors SET name = $1, company = $2, price_range = $3 where id = $4 returning *",
@@ -101,7 +98,7 @@ app.put("/doctordb/api/v1/doctors/:id", async (req, res) => {
 
 // Delete doctor
 
-app.delete("/doctordb/api/v1/doctors/:id", async (req, res) => {
+app.delete("/api/v1/doctors/:id", async (req, res) => {
 	try {
 		db.query("DELETE FROM reviews WHERE doctor_id = $1", [req.params.id]);
 		db.query("DELETE FROM doctors where id = $1", [req.params.id]);
@@ -113,7 +110,7 @@ app.delete("/doctordb/api/v1/doctors/:id", async (req, res) => {
 	}
 });
 
-app.post("/doctordb/api/v1/doctors/:id/addReview", async (req, res) => {
+app.post("/api/v1/doctors/:id/addReview", async (req, res) => {
 	try {
 		const newReview = await db.query(
 			"INSERT INTO reviews (doctor_id, name, review, rating) values ($1, $2, $3, $4) returning *;",
