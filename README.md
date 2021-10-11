@@ -94,7 +94,7 @@ try_files $uri /index.html;
 }
 
 location /api { 
-proxy_pass http://localhost:3001;
+proxy_pass http://localhost:3001/api;
 proxy_http_version 1.1;
 proxy_set_header Upgrade $http_upgrade;
 proxy_set_header Connection 'upgrade';
@@ -105,7 +105,7 @@ proxy_cache_bypass $http_upgrade;
 this works. no need for pm2 for react. clients can access through doctordb.anhonestobserver.com. couldnt get anhonestobserver.com/doctordb to work though.
 important commands:
 sudo systemctl status nginx
-sudo nano /etc/nginx/sites-available/tech.anhonestobserver.com
+sudo nano /etc/nginx/sites-available/doctordb.anhonestobserver.com.conf
 sudo nginx -t  //to check if its alright
 sudo service nginx restart
 now can go to ip address without the :3000 at the end.
@@ -133,3 +133,4 @@ pm2 is weird. if in the ~ folder, doing pm2 start /home/ubuntu/doctordb/server/s
 in the code deploy scripts, dont need to stop and start pm2 because if watch is enabled, pm2 automatically restarts when there are changes made from code pipeline.
 
 to get ssl https certified, https://certbot.eff.org/lets-encrypt/ubuntufocal-nginx
+dont even need to go to the aws certificate manager. just route 53.

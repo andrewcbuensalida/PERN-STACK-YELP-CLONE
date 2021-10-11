@@ -36,7 +36,7 @@ const AddDoctor = () => {
 							onChange={(e) => setName(e.target.value)}
 							type="text"
 							className="form-control"
-							placeholder="name"
+							placeholder="Name"
 						/>
 					</div>
 					<div className="col">
