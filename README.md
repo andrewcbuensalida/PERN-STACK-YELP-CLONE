@@ -129,3 +129,21 @@ pm2 is weird. if in the ~ folder, doing pm2 start /home/ubuntu/doctordb/server/s
 
 in the code deploy scripts, dont need to stop and start pm2 because if watch is enabled, pm2 automatically restarts when there are changes made from code pipeline.
 
+
+for nginx, try 
+location /doctordb {
+    root /home/ubuntu/doctordb/client/build;
+    index index.html
+}
+
+try
+location /doctordb {
+    proxy_pass http://localhost:3000;
+}
+location /doctordb/api/ {
+    proxy_pass http://localhost:3001/doctordb/api/;
+}
+then in doctor finder api, http://localhost:3000/doctordb/api/v1/doctors or with the ip address
+https://docs.nginx.com/nginx/admin-guide/web-server/reverse-proxy/
+
+put .conf at the end of file
