@@ -102,6 +102,8 @@ proxy_set_header Host $host;
 proxy_cache_bypass $http_upgrade;
 }
 }
+have to do the sim link thing sudo ln -s /etc/nginx/sites-available/books.anhonestobserver.com.conf /etc/nginx/sites-enabled/
+
 this works. no need for pm2 for react. clients can access through doctordb.anhonestobserver.com. couldnt get anhonestobserver.com/doctordb to work though.
 important commands:
 sudo systemctl status nginx
@@ -134,3 +136,5 @@ in the code deploy scripts, dont need to stop and start pm2 because if watch is 
 
 to get ssl https certified, https://certbot.eff.org/lets-encrypt/ubuntufocal-nginx
 dont even need to go to the aws certificate manager. just route 53.
+
+because i lost my pem so i cant ssh. had to https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ec2-key-pairs.html basically ssh-keygen -m PEM in cmd, then import it in aws console key pair, then sudo nano /.ssh/authorized_keys and include the rsa. now open cmd and ssh -i doc3.pem ubuntu@54.219.56.20
