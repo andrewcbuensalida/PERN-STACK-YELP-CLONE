@@ -128,7 +128,8 @@ npm i --prefer-offline to not install if it's in cache, this doesnt work with np
 npm i --production to not install devdependencies, this works with npm ci
 use this one npm i --prefer-offline --production for the server
 
-since couldnt build during the deploy, have to build locally, then push to github. the react-scripts folder in the node_modules is empty, so i tried npm i react-scripts, but ends up crashing the instance. 
+workflow:
+since couldnt build during the deploy, have to build locally, then push to github. code pipeline should autodeploy to ec2. the react-scripts folder in the node_modules is empty, so i tried npm i react-scripts, but ends up crashing the instance. 
 
 pm2 is weird. if in the ~ folder, doing pm2 start /home/ubuntu/doctordb/server/server.js says it worked and is online, but when i go to the site, it doesnt work. but if in the doctordb/server folder, it works.
 
@@ -138,3 +139,15 @@ to get ssl https certified, https://certbot.eff.org/lets-encrypt/ubuntufocal-ngi
 dont even need to go to the aws certificate manager. just route 53.
 
 because i lost my pem so i cant ssh. had to https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ec2-key-pairs.html basically ssh-keygen -m PEM in cmd, then import it in aws console key pair, then sudo nano /.ssh/authorized_keys and include the rsa. now open cmd and ssh -i doc3.pem ubuntu@54.219.56.20
+
+now trying typescript
+https://www.sitepoint.com/how-to-migrate-a-react-app-to-typescript/
+not sure if i should do next step in root root, or client, so did root root. this was wrong. should be within client folder, and within server folder.
+npm install --save typescript @types/node @types/react @types/react-dom @types/jest
+tsc --init in root directory, the directory that contains both client and server.
+tsc -w to auto compile on save
+now even subdirectory tsx files will compile to js
+note it should be tsx, not ts
+not that if npm run start starts with jsx, then you change jsx to js, it will break. have to restart.
+tsconfig default excludes node_modules
+gave up. too problematic. maybe easier to start with tsx in the beginning of the project, not converting.
