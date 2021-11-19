@@ -1,3 +1,4 @@
+-- this is to create the table
 CREATE TABLE reviews (
     id BIGSERIAL NOT NULL PRIMARY KEY,
     doctor_id BIGINT NOT NULL REFERENCES doctors(id),
