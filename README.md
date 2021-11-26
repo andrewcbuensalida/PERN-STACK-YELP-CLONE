@@ -81,13 +81,18 @@ to install nginx https://ubuntu.com/tutorials/install-and-configure-nginx#2-inst
 test by going to http (not https) of your ip address
 to configure nginx to proxy to react, https://www.sitepoint.com/configuring-nginx-ssl-node-js/
 
+sudo nano /etc/nginx/sites-available/doctordb.anhonestobserver.com.conf
+have to do the sim link thing sudo ln -s /etc/nginx/sites-available/doctordb.anhonestobserver.com.conf /etc/nginx/sites-enabled/
+sudo systemctl reload nginx to make sure it's working
+because certbot was previously installed, it redirected books.anhonest to doctordb.anhonest. to fix, just run sudo certbot --nginx again to expand the certificates. dont be alarmed if the pem name is still doctordb. it still works.
+
 server {
 listen 80;
 listen [::]:80;
 
 root /home/ubuntu/doctordb/client/build;
 index index.html index.htm index.nginx-debian.html;
-server_name doctordb.anhonestobserver.com www.doctordb.anhonestobserver.com 54.219.56.20;
+server_name doctordb.anhonestobserver.com www.doctordb.anhonestobserver.com;
 
 location / {
 try_files $uri /index.html;
