@@ -50,7 +50,7 @@ const DoctorList = () => {
 					<tr className="bg-primary">
 						<th scope="col">Doctor</th>
 						<th scope="col">Company</th>
-						<th scope="col">Price Range</th>
+						<th scope="col">Price</th>
 						<th scope="col">Rating</th>
 						<th scope="col">Edit</th>
 						<th scope="col">Delete</th>

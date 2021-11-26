@@ -12,7 +12,7 @@ app.use(express.json());
 
 // Get all doctors
 app.get("/api/v1/doctors/:orderby/:offset/:ascdesc", async (req, res) => {
-	console.log("hello 4");
+	console.log("hello 5");
 	try {
 		//const results = await db.query("select * from doctors");
 		const doctorRatingsData = await db.query(
