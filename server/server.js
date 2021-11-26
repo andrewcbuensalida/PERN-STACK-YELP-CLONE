@@ -12,7 +12,7 @@ app.use(express.json());
 
 // Get all doctors
 app.get("/api/v1/doctors/:orderby/:offset/:ascdesc", async (req, res) => {
-	console.log("hello 3");
+	console.log("hello 4");
 	try {
 		//const results = await db.query("select * from doctors");
 		const doctorRatingsData = await db.query(
@@ -82,7 +82,12 @@ app.put("/api/v1/doctors/:id", async (req, res) => {
 	try {
 		const results = await db.query(
 			"UPDATE doctors SET name = $1, company = $2, price_range = $3 where id = $4 returning *",
-			[req.body.name, req.body.company, req.body.price_range, req.params.id]
+			[
+				req.body.name,
+				req.body.company,
+				req.body.price_range,
+				req.params.id,
+			]
 		);
 
 		res.status(200).json({

@@ -28,7 +28,9 @@ const DoctorList = () => {
 	const fetchDoctors = async () => {
 		isLoading.current = true; //?
 		try {
-			const response = await DoctorFinder.get(`/name/${offset.current}/ASC`);
+			const response = await DoctorFinder.get(
+				`/name/${offset.current}/ASC`
+			);
 			if (response.data.results !== 0) {
 				isLoading.current = false;
 				setDoctors((prevDoctors) => [
@@ -49,7 +51,7 @@ const DoctorList = () => {
 						<th scope="col">Doctor</th>
 						<th scope="col">Company</th>
 						<th scope="col">Price Range</th>
-						<th scope="col">Ratings</th>
+						<th scope="col">Rating</th>
 						<th scope="col">Edit</th>
 						<th scope="col">Delete</th>
 					</tr>

@@ -156,3 +156,44 @@ note it should be tsx, not ts
 not that if npm run start starts with jsx, then you change jsx to js, it will break. have to restart.
 tsconfig default excludes node_modules
 gave up. too problematic. maybe easier to start with tsx in the beginning of the project, not converting.
+
+
+now migrating to ec2 t2 micro:
+
+pm2 stuff:
+npm i pm2 -g
+
+ss -tnlp | grep "node /" to see what ports pm2 processes are running on.
+
+to run server, with auto restart when files change, put --watch,
+pm2 start server.js --watch --name doctordb
+
+pm2 restart to reload the .env
+
+then to auto restart when instance reboots,
+pm2 startup
+pm2 save
+
+to check logs , pm2 logs heat --timestamp
+
+
+to install postgres on ubuntu:
+first dump local database, meaning make a copy, 
+pg_dump <dbname> > <outfile>
+https://www.digitalocean.com/community/tutorials/how-to-install-postgresql-on-ubuntu-20-04-quickstart
+sudo apt install postgresql postgresql-contrib
+to switch to postgres user,
+sudo -i -u postgres
+now can access psql
+psql
+-- change password
+alter user postgres password '<myPassword>';
+now exit out of postgres
+\q
+while inside postgres user (not psql),
+create database with createdb -T template0 doctordb
+then switch to main user with exit
+then in ubuntu user, in the folder where doctordb.pgsql is,
+import dummy data dump
+sudo -u postgres psql doctordb < 'doctordb.pgsql'
+should see create tables and alter tables
