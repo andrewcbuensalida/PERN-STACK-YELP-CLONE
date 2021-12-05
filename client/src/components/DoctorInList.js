@@ -67,6 +67,7 @@ function DoctorInList({ doctor, setDoctors }) {
 					style={{ cursor: "pointer" }}
 					onClick={(e) => handleDoctorSelect(e)}
 					key={doctor.id}
+					class="row no-gutters pl-5"
 				>
 					{/* {console.log("reviews in return")}
 				{console.log(reviews)} */}
@@ -82,19 +83,23 @@ function DoctorInList({ doctor, setDoctors }) {
 							setAverageRating={setAverageRating}
 						/>
 					)}
-
-					<td>{doctor.name}</td>
-					<td>{doctor.company}</td>
-					<td>{"$".repeat(doctor.price_range)}</td>
-					<td>
+					{/* //col-sm-6 col-md-3 */}
+					<td class="col-md-2 col-sm-4  border-0">{doctor.name}</td>
+					<td class="col-md-2 col-sm-4  border-0 text-truncate pr-2">
+						{doctor.company}
+					</td>
+					<td class="col-md-2 col-sm-4  border-0">
+						{"$".repeat(doctor.price_range)}
+					</td>
+					<td class="col-md-2 col-sm-4  border-0">
 						<Ratings count={count} averageRating={averageRating} />
 					</td>
-					<td>
+					<td class="col-md-2 col-sm-4  border-0">
 						<button
 							onClick={(e) => handleUpdate(e)}
 							className="btn btn-warning"
 						>
-							Update
+							Edit info
 						</button>
 						{isUpdateSeen && (
 							<UpdateDoctor
@@ -104,7 +109,7 @@ function DoctorInList({ doctor, setDoctors }) {
 							/>
 						)}
 					</td>
-					<td>
+					<td class="col-md-2 col-sm-4  border-0">
 						<button
 							onClick={(e) => handleDelete(e, doctor.id)}
 							className="btn btn-danger"

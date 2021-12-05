@@ -223,6 +223,12 @@ if it's more, they start to stack. basically the number is what proportion they 
                 <div class="col-2">column</div>
             </d>
 can set breakpoints like sm md lg. these are the break points, so if the width starts to get thinner than the sm break point, that's when they stack and become full width. when the column stacks, it takes up the whole with of the column.
+  xs: 0,
+  sm: 576px,
+  md: 768px,
+  lg: 992px,
+  xl: 1200px,
+  xxl: 1400px
 lg = 1200px for desktops, md = 992px for small laptops, sm = 768px for tablets, xs = 768px for phones. xl for 24inch monitors. 
             <div class="row">
                 <div class="col-sm">column</div>

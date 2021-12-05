@@ -45,17 +45,28 @@ const DoctorList = () => {
 
 	return (
 		<div className="list-group">
-			<table className="table table-hover table-dark">
-				<thead>
-					<tr className="bg-primary">
-						<th scope="col">Doctor</th>
-						<th scope="col">Company</th>
-						<th scope="col">Price</th>
-						<th scope="col">Rating</th>
-						<th scope="col">Edit</th>
-						<th scope="col">Delete</th>
-					</tr>
-				</thead>
+			<table className="table table-hover table-dark table-striped table-sm ">
+				<tr className="bg-info row no-gutters pl-5 ">
+					<th scope="col" class="col-md-2 col-sm-4 border-0">
+						Doctor
+					</th>
+					<th scope="col" class="col-md-2 col-sm-4 border-0">
+						Company
+					</th>
+					<th scope="col" class="col-md-2 col-sm-4 border-0">
+						Price
+					</th>
+					<th scope="col" class="col-md-2 col-sm-4 border-0">
+						Rating
+					</th>
+					<th scope="col" class="col-md-2 col-sm-4 border-0">
+						Edit info
+					</th>
+					<th scope="col" class="col-md-2 col-sm-4 border-0">
+						Delete
+					</th>
+				</tr>
+
 				<tbody>
 					{doctors.map((doctor) => {
 						return (
