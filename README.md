@@ -458,3 +458,8 @@ navigation options =======================================================
                     <a href="#" class="nav-link disabled">Item Four</a>
                 </li>
             </ul>
+
+
+            ================================================
+now working on the action doctordb responsive bootstrap
+buggy the width of the body in mobile device mode in chrome. sometimes the width isnt wide enough.
