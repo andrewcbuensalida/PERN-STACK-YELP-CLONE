@@ -50,13 +50,13 @@ const ReviewDoctor = ({
 				overflowY: "auto",
 			}}
 		>
-			<button
+			<button class='btn btn-danger'
 				onClick={(e) => {
 					e.stopPropagation();
 					setIsReviewSeen(false);
 				}}
 			>
-				X
+				&times;
 			</button>
 			<h1 className="text-center display-1">{doctor.name}</h1>
 			<div className="text-center">
