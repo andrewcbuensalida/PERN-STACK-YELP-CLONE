@@ -74,7 +74,7 @@ const ReviewDoctor = ({
 				<StarRating rating={averageRating} />
 				<span className="text-warning ml-1">{`(${count || 0})`}</span>
 			</div>
-			<div className="mt-3">
+			<div className="mt-3 container">
 				<Reviews reviews={reviews} />
 			</div>
 
