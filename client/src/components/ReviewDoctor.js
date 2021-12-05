@@ -20,16 +20,24 @@ const ReviewDoctor = ({
 	const handleSubmitReview = async (e) => {
 		e.preventDefault();
 		try {
-			const response = await DoctorFinder.post(`/${doctor.id}/addReview`, {
-				name,
-				review: reviewText,
-				rating,
-			});
+			const response = await DoctorFinder.post(
+				`/${doctor.id}/addReview`,
+				{
+					name,
+					review: reviewText,
+					rating,
+				}
+			);
 			count++;
 			setCount(count);
-			setReviews((prevReviews) => [...prevReviews, response.data.data.review]);
+			setReviews((prevReviews) => [
+				...prevReviews,
+				response.data.data.review,
+			]);
 			setAverageRating((prev) => {
-				return (prev * (count - 1)) / count + Number(rating) * (1 / count);
+				return (
+					(prev * (count - 1)) / count + Number(rating) * (1 / count)
+				);
 			});
 			setName("");
 			setRating("Rating");
@@ -48,9 +56,12 @@ const ReviewDoctor = ({
 				backgroundColor: "grey",
 				padding: "20px",
 				overflowY: "auto",
+				zIndex: "9999",
+				cursor: "default",
 			}}
 		>
-			<button class='btn btn-danger'
+			<button
+				class="btn btn-danger"
 				onClick={(e) => {
 					e.stopPropagation();
 					setIsReviewSeen(false);

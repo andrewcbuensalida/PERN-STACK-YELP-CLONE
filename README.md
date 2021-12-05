@@ -468,4 +468,4 @@ navigation options =======================================================
 
             ================================================
 now working on the action doctordb responsive bootstrap
-buggy the width of the body in mobile device mode in chrome. sometimes the width isnt wide enough.
+buggy the width of the body in mobile device mode in chrome. sometimes the width isnt wide enough. so have to not use device mode and just drag the screen size manually.

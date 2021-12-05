@@ -29,8 +29,8 @@ const AddDoctor = () => {
 	return (
 		<div className="mb-4">
 			<form action="">
-				<div className="form-row align-items-center">
-					<div className="col">
+				<div className="form-row align-items-center  mr-0">
+					<div className="col-sm">
 						<input
 							value={name}
 							onChange={(e) => setName(e.target.value)}
@@ -39,7 +39,7 @@ const AddDoctor = () => {
 							placeholder="Name"
 						/>
 					</div>
-					<div className="col">
+					<div className="col-sm">
 						<input
 							value={company}
 							onChange={(e) => setLocation(e.target.value)}
@@ -48,11 +48,11 @@ const AddDoctor = () => {
 							placeholder="Company"
 						/>
 					</div>
-					<div className="col">
+					<div className="col-sm-2 ">
 						<select
 							value={priceRange}
 							onChange={(e) => setPriceRange(e.target.value)}
-							className="custom-select my-1 mr-sm-2"
+							className="custom-select my-1 mr-sm-2 "
 						>
 							<option disabled>Price Range</option>
 							<option value="1">$</option>
@@ -65,7 +65,7 @@ const AddDoctor = () => {
 					<button
 						onClick={handleSubmit}
 						type="submit"
-						className="btn btn-primary"
+						className="btn btn-primary col-sm-2 m-auto  w-25"
 					>
 						Add
 					</button>
