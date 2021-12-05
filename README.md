@@ -135,6 +135,7 @@ use this one npm i --prefer-offline --production for the server
 
 workflow:
 since couldnt build during the deploy, have to build locally, then push to github. code pipeline should autodeploy to ec2. the react-scripts folder in the node_modules is empty, so i tried npm i react-scripts, but ends up crashing the instance. 
+during development, will be using the local postgres db.
 
 pm2 is weird. if in the ~ folder, doing pm2 start /home/ubuntu/doctordb/server/server.js says it worked and is online, but when i go to the site, it doesnt work. but if in the doctordb/server folder, it works.
 
@@ -172,6 +173,7 @@ pm2 restart to reload the .env
 
 then to auto restart when instance reboots,
 pm2 startup
+then copy paste what they tell you to
 pm2 save
 
 to check logs , pm2 logs heat --timestamp
@@ -197,3 +199,262 @@ then in ubuntu user, in the folder where doctordb.pgsql is,
 import dummy data dump
 sudo -u postgres psql doctordb < 'doctordb.pgsql'
 should see create tables and alter tables
+
+
+turn on autosave when working on styling
+===========================================
+now making bootstrap responsive
+bootstrap has 12 columns
+columns have to be contained in a row, like this:
+        <div class="container">
+            <div class="row">
+                <div class="col">column</div>
+                <div class="col">column</div>
+                <div class="col">column</div>
+            </div>
+        </div>
+only columns may be immediate children of fows.
+if you put a dash then a number after the col, it represents how many columns they take up out of 12.
+if the total is less than 12, there's space left. 
+if it's more, they start to stack. basically the number is what proportion they own, not really the absolute size.
+            <d class="row">
+                <div class="col-4">column</div>
+                <div class="col-6">column</div>
+                <div class="col-2">column</div>
+            </d>
+can set breakpoints like sm md lg. these are the break points, so if the width starts to get thinner than the sm break point, that's when they stack and become full width. when the column stacks, it takes up the whole with of the column.
+lg = 1200px for desktops, md = 992px for small laptops, sm = 768px for tablets, xs = 768px for phones. xl for 24inch monitors. 
+            <div class="row">
+                <div class="col-sm">column</div>
+                <div class="col-sm">column</div>
+            </div>
+can also combine word sizes with number sizes, so this will initially start with 3 columns of different sizes, then when each width reaches sm, they stack.
+           <div class="row">
+                <div class="col-sm-4">column</div>
+                <div class="col-sm-6">column</div>
+                <div class="col-sm-2">column</div>
+            </div>
+no gutters on the row removes the padding in the columns. this will make the total width a little skinnier.
+            <div class="row no-gutters">
+                <div class="col">column</div>
+                <div class="col">column</div>
+            </div>
+offset creates a gap between the columns, so below would move the second column, that has a size of 2 columns, to the right by 4 columns
+            <div class="row">
+                <div class="col-sm-6">column</div>
+                <div class="col-sm-2 offset-sm-4">column</div>
+            </div>
+if you have 4 columns, and want it in 1 row when the screen is wide, then have 2 columns and 2 rows when the screen is small, can mix and match. startin from wide, each column will take up 3/12ths the width, then when the size reaches md it will stack and now each column will have a width of 6/12th. then when it reacges sm, it will stack into 1 column.
+            <div class="row">
+                <div class="col-sm-6 col-md-3">column</div>
+                <div class="col-sm-6 col-md-3">column</div>
+                <div class="col-sm-6 col-md-3">column</div>
+                <div class="col-sm-6 col-md-3">column</div>
+            </div>
+
+
+nav bars=======================================================================
+navbar makes it bigger, navbar-light makes the font dark instead of blue, bg-light makes the background light grey instead of white, navbar-brand makes font bigger. navbar-expand-lg makes nav-links spread out from the burger icon. fixed-top sets the position to fixed.
+        <nav class="navbar navbar-light bg-light navbar-expand-lg fixed-top">
+            <a href="#" class="navbar-brand">My Website</a>
+            <!-- navbar-toggler gives the button the function of opening and closing the navlinks, together with collapse. need to give it a target which points to the id of the div that contains the ul of the navlinks.   -->
+            <button class="navbar-toggler" data-toggle="collapse" data-target="#navbarCollapse">
+                <!-- this is the burger icon -->
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarCollapse">
+            <!-- ml-auto is margin left auto, to push navlinks to the right -->
+                <ul class="navbar-nav ml-auto">
+                    <li class="navbar-item">
+                        <a href="#" class="nav-link">Homepage</a>
+                    </li>
+                    <li class="navbar-item">
+                        <a href="#" class="nav-link">Blog</a>
+                    </li>
+                    <li class="navbar-item">
+                        <a href="#" class="nav-link">About Me</a>
+                    </li>
+                    <li class="navbar-item">
+                        <a href="#" class="nav-link">Contact</a>
+                    </li>
+                </ul>
+            </div>
+        </nav>
+
+modals aka pop-up boxes that darken the background========================================================
+<!-- data-toggle="modal" gives the button the function to toggle a target modal.  -->
+ <button class="btn btn-primary" data-toggle="modal" data-target="#myModal">Launch Modal</button>
+        <!-- fade gives it a transition when opening -->
+        <div class="modal fade" id="myModal">
+        <!-- modal-dialog, content, header, body, footer gives the modal a structure -->
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title">Hello World</h5>
+                        <!-- close button on top right -->
+                        <button type="button" class="close" data-dismiss="modal">
+                            <span>&times;</span>
+                        </button>
+                    </div>
+                    <div class="modal-body">
+                        <p>Lorem ipsum dolor</p>
+                    </div>
+                    <div class="modal-footer">
+                        <button class="btn btn-primary" data-dismiss="modal">Cancel</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+form ========================================================
+        <form>
+        <!-- probably needs an action in the form tag -->
+            <div class="form-group row">
+            <!-- col-sm-3 means it takes up 3 columns, and when it gets smaller than a sm, it collapses and becomes one column full width -->
+                <label class="col-sm-3 col-form-label" for="email">Email Address</label>
+                <div class="col-sm-9">
+                    <input type="text" class="form-control" id="email">
+                </div>
+            </div>
+            <div class="form-group row">
+                <label class="col-sm-3 col-form-label" for="password">Password</label>
+                <div class="col-sm-9">
+                    <input type="password" class="form-control" id="password">
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-sm-9 offset-sm-3">
+                    <button type="submit" class="btn btn-primary">Login Now</button>
+                </div>
+            </div>
+        </form>
+
+list group=============================================================
+            <ul class="list-group">
+            <!-- these are not clickable. these span the whole screen -->
+                <li class="list-group-item">
+                    Homepage
+                </li>
+                <li class="list-group-item">
+                    Homepage
+                </li>
+                <li class="list-group-item">
+                    Homepage
+                </li>
+            </ul>
+
+for a clickable list
+            <div class="list-group">
+            <!-- list-group-item-action makes the font dark -->
+                <a href="#" class="list-group-item list-group-item-action">
+                    Homepage
+                </a>
+                <!-- d-flex makes it display:flex. now can justify-content-between which makes space between -->
+                <a href="#" class="list-group-item list-group-item-action d-flex justify-content-between align-items-center">
+                    Notifications
+                    <!-- primary makes it blue. pill makes it border-radius circular -->
+                    <span class="badge badge-primary badge-pill">3</span>
+                </a>
+                <!-- active makes the item highlighted blue -->
+                <a href="#" class="list-group-item list-group-item-action active">
+                    Blog
+                </a>
+                <a href="#" class="list-group-item list-group-item-action">
+                    Contact
+                </a>
+            </div>
+card ===========================================================
+<div class="card">
+<!-- card-img-top rounds the top corners but squares the bottom corners -->
+                <img class="card-img-top" alt="Card header image" src="https://placeimg.com/640/480/nature">
+                <!-- card-body creates padding -->
+                <div class="card-body">
+                    <h5 class="card-title">Card Title</h5>
+                    <p class="card-text">Lorem ipsum dolor</p>
+                </div>
+                <!-- list-group-flush squares the corners -->
+                <ul class="list-group list-group-flush">
+                    <li class="list-group-item">Item One</li>
+                    <li class="list-group-item">Item One</li>
+                    <li class="list-group-item">Item One</li>
+                    <li class="list-group-item">Item One</li>
+                </ul>
+                <div class="card-body">
+                    <a href="#" class="btn btn-primary">Button One</a>
+                    <!-- default makes background white -->
+                    <a href="#" class="btn btn-default">Button Two</a>
+                </div>
+            </div>
+
+tables =============================================
+table-dark makes the table dark
+table-striped makes table striped
+table-bordered makes vertical lines
+table-primary changes the color of the row to blue
+table-hover highlights row on hover
+table-sm makes it more compact
+
+<table class="table table-sm">
+                <thead>
+                    <tr>
+                        <th>ID</th>
+                        <th>Name</th>
+                        <th>Age</th>
+                        <th>Country</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr class="table-primary">
+                        <td>01</td>
+                        <td>Neil Rowe</td>
+                        <td>18</td>
+                        <td>United Kingdom</td>
+                    </tr>
+                    <tr>
+                        <td>02</td>
+                        <td>John Doe</td>
+                        <td>33</td>
+                        <td>Australia</td>
+                    </tr>
+                    <tr>
+                        <td>03</td>
+                        <td>David Smith</td>
+                        <td>25</td>
+                        <td>Canada</td>
+                    </tr>
+                </tbody>
+            </table>
+
+alerts            ================================================================
+            <div class="alert alert-danger">
+            <!-- alerts are little messages that can close -->
+                <h4 class="alert-heading">Warning!</h4>
+                <hr />
+                <p class="mb-0">Something really is not right!</p>
+            </div>
+
+
+navigation options =======================================================
+            <ul class="nav nav-tabs">
+            <!-- nav-tabs makes it look like those folders with the labels on top -->
+                <li class="nav-item">
+                    <a href="#" class="nav-link active">Item One</a>
+                </li>
+                <li class="nav-item">
+                <!-- this is a drop down nav button -->
+                    <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown">Item Two</a>
+                    <div class="dropdown-menu">
+                        <a href="#" class="dropdown-item">Dropdown 1</a>
+                        <a href="#" class="dropdown-item">Dropdown 2</a>
+                        <a href="#" class="dropdown-item">Dropdown 3</a>
+                        <div class="dropdown-divider"></div>
+                        <a href="#" class="dropdown-item">Dropdown 4</a>
+                    </div>
+                </li>
+                <li class="nav-item">
+                    <a href="#" class="nav-link">Item Three</a>
+                </li>
+                <li class="nav-item">
+                    <a href="#" class="nav-link disabled">Item Four</a>
+                </li>
+            </ul>
