@@ -45,24 +45,24 @@ const DoctorList = () => {
 
 	return (
 		<div className="list-group">
-			<table className="table table-hover table-dark table-striped table-sm ">
+			<table className="table table-hover table-dark table-striped table-sm table-borderless ">
 				<tr className="bg-info row no-gutters pl-5 ">
-					<th scope="col" class="col-md-2 col-sm-4 border-0">
+					<th scope="col" class="col-md-2 col-sm-4 ">
 						Doctor
 					</th>
-					<th scope="col" class="col-md-2 col-sm-4 border-0">
+					<th scope="col" class="col-md-2 col-sm-4 ">
 						Company
 					</th>
-					<th scope="col" class="col-md-2 col-sm-4 border-0">
+					<th scope="col" class="col-md-2 col-sm-4 ">
 						Price
 					</th>
-					<th scope="col" class="col-md-2 col-sm-4 border-0">
+					<th scope="col" class="col-md-2 col-sm-4 ">
 						Rating
 					</th>
-					<th scope="col" class="col-md-2 col-sm-4 border-0">
+					<th scope="col" class="col-md-2 col-sm-4 ">
 						Edit info
 					</th>
-					<th scope="col" class="col-md-2 col-sm-4 border-0">
+					<th scope="col" class="col-md-2 col-sm-4 ">
 						Delete
 					</th>
 				</tr>

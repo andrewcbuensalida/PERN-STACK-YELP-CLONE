@@ -84,17 +84,15 @@ function DoctorInList({ doctor, setDoctors }) {
 						/>
 					)}
 					{/* //col-sm-6 col-md-3 */}
-					<td class="col-md-2 col-sm-4  border-0">{doctor.name}</td>
-					<td class="col-md-2 col-sm-4  border-0 text-truncate pr-2">
-						{doctor.company}
-					</td>
-					<td class="col-md-2 col-sm-4  border-0">
+					<td class="col-md-2 col-sm-4  ">{doctor.name}</td>
+					<td class="col-md-2 col-sm-4  pr-2">{doctor.company}</td>
+					<td class="col-md-2 col-sm-4  ">
 						{"$".repeat(doctor.price_range)}
 					</td>
-					<td class="col-md-2 col-sm-4  border-0">
+					<td class="col-md-2 col-sm-4  ">
 						<Ratings count={count} averageRating={averageRating} />
 					</td>
-					<td class="col-md-2 col-sm-4  border-0">
+					<td class="col-md-2 col-sm-4  ">
 						<button
 							onClick={(e) => handleUpdate(e)}
 							className="btn btn-warning"
@@ -109,7 +107,7 @@ function DoctorInList({ doctor, setDoctors }) {
 							/>
 						)}
 					</td>
-					<td class="col-md-2 col-sm-4  border-0">
+					<td class="col-md-2 col-sm-4  ">
 						<button
 							onClick={(e) => handleDelete(e, doctor.id)}
 							className="btn btn-danger"
