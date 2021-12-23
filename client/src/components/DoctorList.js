@@ -17,6 +17,7 @@ const DoctorList = () => {
 
 	const handleScroll = () => {
 		if (
+			// this method doesnt work if they are too far zoomed out. instead of documentElement.scrollTop, could probably use window.pageYOffset. there's another method i forget the name.
 			document.documentElement.scrollTop >
 				document.documentElement.scrollHeight - 1500 &&
 			!isLoading.current

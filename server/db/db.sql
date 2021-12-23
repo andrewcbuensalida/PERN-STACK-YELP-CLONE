@@ -20,7 +20,7 @@ from doctors
     ) reviews on doctors.id = reviews.doctor_id;
 
 
-    ?
+    
 create table doctors (
     id bigserial not null primary key,
     name varchar(50) not null,
