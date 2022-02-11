@@ -167,8 +167,9 @@ npm i pm2 -g
 ss -tnlp | grep "node /" to see what ports pm2 processes are running on.
 
 to run server, with auto restart when files change, put --watch,
-pm2 start server.js --watch --name doctordb
-
+pm2 start server.js --watch --time --name doctordb
+ --time is for it to keep track of time
+ 
 pm2 restart to reload the .env
 
 then to auto restart when instance reboots,
@@ -178,6 +179,8 @@ pm2 save
 
 to check logs , pm2 logs heat --timestamp
 
+pm2 stop <pid>
+pm2 delete <pid>
 
 to install postgres on ubuntu:
 first dump local database, meaning make a copy, 
